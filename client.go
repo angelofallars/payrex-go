@@ -15,7 +15,7 @@ type Client struct {
 
 	// The base URL to make requests to.
 	//
-	// Default URL is 'https://api.payrexhq.com'
+	// Default URL is https://api.payrexhq.com
 	//
 	// Only override this if you know what you are doing.
 	APIBaseURL string
