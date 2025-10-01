@@ -6,6 +6,14 @@ import (
 	"strings"
 )
 
+// serviceProvider is the interface that all Service types implement.
+type serviceProvider interface {
+	// setupClient sets up the service by supplying it with the [Client].
+	setupClient(*Client)
+	// setup sets up the service's other data.
+	setup()
+}
+
 // service is the base type that all Service types embed.
 type service[T any] struct {
 	client *Client
@@ -14,14 +22,6 @@ type service[T any] struct {
 
 func (s *service[T]) setupClient(client *Client) {
 	s.client = client
-}
-
-// serviceProvider is the interface that all Service types implement.
-type serviceProvider interface {
-	// setupClient sets up the service by supplying it with the [Client].
-	setupClient(*Client)
-	// setup sets up the service's other data.
-	setup()
 }
 
 // setupServices sets up the Service fields.
