@@ -27,7 +27,7 @@ import (
 
 ## Getting started
 
-Simple usage looks like:
+Basic usage looks like this:
 
 ```go
 package main
@@ -35,12 +35,13 @@ package main
 import (
 	"errors"
 	"fmt"
+	"os"
 
 	"github.com/angelofallars/payrex-go"
 )
 
 func main() {
-	payrexClient := payrex.NewClient("sk_test_...")
+	payrexClient := payrex.NewClient(os.Getenv("PAYREX_API_KEY"))
 
 	paymentIntent, err := payrexClient.PaymentIntents.Create(&payrex.CreatePaymentIntentOptions{
 		Amount:         10000,
@@ -52,19 +53,23 @@ func main() {
 		printPayrexError(err)
 		return
 	}
-
 	fmt.Printf("%+v\n", paymentIntent)
 
-	paymentIntent2, err := payrexClient.PaymentIntents.Retrieve(paymentIntent.ID)
+	paymentIntent, err = payrexClient.PaymentIntents.Retrieve(paymentIntent.ID)
 	if err != nil {
 		printPayrexError(err)
 		return
 	}
+	fmt.Printf("%+v\n", paymentIntent)
 
-	fmt.Printf("%+v\n", paymentIntent2)
+	paymentIntent, err = payrexClient.PaymentIntents.Cancel(paymentIntent.ID)
+	if err != nil {
+		printPayrexError(err)
+		return
+	}
+	fmt.Printf("%+v\n", paymentIntent)
 }
 
-// Handle errors
 func printPayrexError(err error) {
 	var payrexError payrex.Error
 	if !errors.As(err, &payrexError) {
