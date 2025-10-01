@@ -14,7 +14,7 @@ func main() {
 	paymentIntent, err := payrexClient.PaymentIntents.Create(&payrex.CreatePaymentIntentOptions{
 		Amount:      100_00, // represents ₱100.00
 		Currency:    payrex.CurrencyPHP,
-		Description: payrex.Optional("Dino Treat"),
+		Description: payrex.NotNil("Dino Treat"),
 		PaymentMethods: payrex.Slice(
 			payrex.PaymentMethodGCash,
 			payrex.PaymentMethodMaya,
