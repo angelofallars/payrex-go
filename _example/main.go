@@ -15,10 +15,10 @@ func main() {
 		Amount:      10000,
 		Currency:    payrex.CurrencyPHP,
 		Description: payrex.Optional("Dino Treat"),
-		PaymentMethods: []payrex.PaymentMethod{
+		PaymentMethods: payrex.Slice(
 			payrex.PaymentMethodGCash,
 			payrex.PaymentMethodMaya,
-		},
+		),
 	})
 	if err != nil {
 		printPayrexError(err)
