@@ -89,7 +89,7 @@ Progress on implemented resources:
 - [x] Customers
 - [x] Payment Intents
 - [x] Payments
-- [ ] Payouts
+- [x] Payouts
 - [ ] Refunds
 - [ ] Webhooks
 

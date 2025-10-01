@@ -18,6 +18,7 @@ type Client struct {
 	Customers      ServiceCustomers
 	PaymentIntents ServicePaymentIntents
 	Payments       ServicePayments
+	Payouts        ServicePayouts
 
 	// The base URL to make requests to.
 	//
