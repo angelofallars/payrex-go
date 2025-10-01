@@ -41,6 +41,7 @@ func main() {
 	payrexClient := payrex.NewClient("sk_test_...")
 
 	paymentIntent, err := payrexClient.PaymentIntents.Retrieve("pi_...")
+
 	if err != nil {
 		printPayrexError(err)
 		return
@@ -50,9 +51,11 @@ func main() {
 
 	paymentIntent, err = payrexClient.PaymentIntents.Create(&payrex.CreatePaymentIntentOptions{
 		Amount:         10000,
+		Currency:       payrex.CurrencyPHP,
 		Description:    payrex.Optional("Dino Treat"),
 		PaymentMethods: []payrex.PaymentMethod{payrex.PaymentMethodGCash},
 	})
+
 	if err != nil {
 		printPayrexError(err)
 		return
@@ -69,9 +72,9 @@ func printPayrexError(err error) {
 	}
 
 	for _, errMsg := range payrexError.Errors {
-		fmt.Printf("code: %v", errMsg.Code)
-		fmt.Printf("detail: %v", errMsg.Detail)
-		fmt.Printf("parameters: %v", errMsg.Parameter)
+		fmt.Printf("code: %v\n", errMsg.Code)
+		fmt.Printf("detail: %v\n", errMsg.Detail)
+		fmt.Printf("parameters: %v\n", errMsg.Parameter)
 	}
 }
 ```
