@@ -11,6 +11,7 @@ type Client struct {
 	PaymentIntents ServicePaymentIntents
 	Payments       ServicePayments
 	Payouts        ServicePayouts
+	Webhooks       ServiceWebhooks
 
 	// The base URL to make requests to.
 	//

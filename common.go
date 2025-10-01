@@ -48,3 +48,7 @@ const (
 	AllowedFundingCredit AllowedFunding = "credit"
 	AllowedFundingDebit  AllowedFunding = "debit"
 )
+
+type Event string
+
+// TODO: Event values

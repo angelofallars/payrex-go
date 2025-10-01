@@ -100,7 +100,7 @@ Progress on implemented resources:
 - [x] Payments
 - [x] Payouts
 - [ ] Refunds
-- [ ] Webhooks
+- [x] Webhooks
 
 ## Additional resources
 
