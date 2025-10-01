@@ -27,6 +27,9 @@ import (
 
 ## Getting started
 
+> [!NOTE]
+> To read about all the available features, check out the methods of each **Service** in the `payrex.Client` type in the [Go package documentation](https://pkg.go.dev/github.com/angelofallars/payrex-go#Client).
+
 Basic usage looks like this:
 
 ```go
