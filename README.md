@@ -2,6 +2,18 @@
 
 The payrex-go library provides Go applications easy access to the [PayRex](https://www.payrexhq.com/) API.
 
+Progress on implemented resources:
+- [ ] Billing Statement Line Items
+- [ ] Billing Statements
+- [ ] Checkout Sessions
+- [ ] Customer Sessions
+- [x] Customers
+- [x] Payment Intents
+- [x] Payments
+- [ ] Payouts
+- [ ] Refunds
+- [ ] Webhooks
+
 ## Installation
 
 Use `go get`..
