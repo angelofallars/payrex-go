@@ -8,8 +8,6 @@ import (
 	"strings"
 )
 
-const apiBaseURL = "https://api.payrexhq.com"
-
 // Client is the main type for interacting with the PayRex API.
 type Client struct {
 	Customers      ServiceCustomers
@@ -30,6 +28,8 @@ type Client struct {
 
 // NewClient creates a new [Client] instance.
 func NewClient(apiKey string) *Client {
+	const apiBaseURL = "https://api.payrexhq.com"
+
 	c := &Client{
 		apiKey:     apiKey,
 		httpClient: http.Client{},
