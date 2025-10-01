@@ -15,10 +15,10 @@ const (
 )
 
 type PaymentMethodOptions struct {
-	Card PaymentMethodOptionsCard `json:"card" query:"card"`
+	Card Card `json:"card" query:"card"`
 }
 
-type PaymentMethodOptionsCard struct {
+type Card struct {
 	CaptureType    CaptureType       `json:"capture_type" query:"capture_type"`
 	AllowedBins    *[]string         `json:"allowed_bins" query:"allowed_bins"`
 	AllowedFunding *[]AllowedFunding `json:"allowed_funding" query:"allowed_funding"`
