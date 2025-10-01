@@ -63,7 +63,7 @@ type ServicePayouts struct{ service }
 
 const pathPayouts = "payouts"
 
-// ListTransactions lists payout transactions by Payout ID. The 'options' parameter can be nil.
+// ListTransactions lists payout transactions by [Payout] ID. The 'options' parameter can be nil.
 //
 // Endpoint: GET /payouts/:id/transactions
 //
