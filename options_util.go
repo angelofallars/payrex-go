@@ -13,8 +13,16 @@ func NotNil[T any](v T) *T {
 
 // Slice returns a slice containing all the passed in values.
 //
-// Useful if you want to assign a slice literal to a slice field in an Options struct with inferred types,
+// Useful for assigning a slice literal to an Options struct's slice field with type inference,
 // instead of manually declaring the slice's element type.
 func Slice[T any](values ...T) []T {
 	return values
+}
+
+// NotNilSlice returns a slice pointer containing all the passed in values.
+//
+// Useful for assigning a slice literal to an Options struct's nullable slice field with type inference,
+// instead of manually declaring the slice's element type.
+func NotNilSlice[T any](values ...T) *[]T {
+	return &values
 }
