@@ -6,14 +6,13 @@ package payrex
 //
 // API reference: https://docs.payrexhq.com/docs/api/payments
 type Payment struct {
-	ID              string             `json:"id"`
+	BaseResource
 	Amount          int                `json:"amount"`
 	AmountRefunded  int                `json:"amount_refunded"`
 	Billing         Billing            `json:"billing"`
 	Currency        Currency           `json:"currency"`
 	Description     *string            `json:"description"`
 	Fee             int                `json:"fee"`
-	Livemode        bool               `json:"livemode"`
 	Metadata        *map[string]string `json:"metadata"`
 	NetAmount       int                `json:"net_amount"`
 	PaymentIntentID string             `json:"payment_intent_id"`
@@ -21,8 +20,6 @@ type Payment struct {
 	Customer        *Customer          `json:"customer"`
 	PaymentMethod   PaymentMethodType  `json:"payment_method"`
 	Refunded        bool               `json:"refunded"`
-	CreatedAt       int                `json:"created_at"`
-	UpdatedAt       int                `json:"updated_at"`
 }
 
 type Billing struct {

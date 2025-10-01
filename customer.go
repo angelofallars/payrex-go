@@ -6,16 +6,13 @@ package payrex
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers
 type Customer struct {
-	ID                                 string             `json:"id"`
+	BaseResource
 	BillingStatementPrefix             string             `json:"billing_statement_prefix"`
 	Currency                           Currency           `json:"currency"`
 	Email                              string             `json:"email"`
-	Livemode                           bool               `json:"livemode"`
 	Name                               string             `json:"name"`
 	Metadata                           *map[string]string `json:"metadata"`
 	NextBillingStatementSequenceNumber string             `json:"next_billing_statement_sequence_number"`
-	CreatedAt                          int                `json:"created_at"`
-	UpdatedAt                          int                `json:"updated_at"`
 }
 
 // ServiceCustomers provides methods to interact with [Customer] resources, available in the [Client].Customers field.

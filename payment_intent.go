@@ -6,14 +6,13 @@ package payrex
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents
 type PaymentIntent struct {
-	ID                   string                   `json:"id"`
+	BaseResource
 	Amount               int                      `json:"amount"`
 	AmountReceived       int                      `json:"amount_received"`
 	AmountCapturable     int                      `json:"amount_capturable"`
 	ClientSecret         string                   `json:"client_secret"`
 	Currency             Currency                 `json:"currency"`
 	Description          *string                  `json:"description"`
-	Livemode             bool                     `json:"livemode"`
 	Metadata             *map[string]string       `json:"metadata"`
 	PaymentMethodID      *string                  `json:"payment_method_id"`
 	PaymentMethods       []PaymentMethod          `json:"payment_methods"`
@@ -22,8 +21,6 @@ type PaymentIntent struct {
 	Status               PaymentIntentStatus      `json:"status"`
 	NextAction           *PaymentIntentNextAction `json:"next_action"`
 	ReturnURL            string                   `json:"return_url"`
-	CreatedAt            int                      `json:"created_at"`
-	UpdatedAt            int                      `json:"updated_at"`
 }
 
 // PaymentIntentStatus enumerates the valid values for the [PaymentIntent].Status field.
