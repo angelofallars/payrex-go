@@ -44,6 +44,7 @@ func main() {
 func printError(err error) {
 	var payrexError payrex.Error
 	if !errors.As(err, &payrexError) {
+		fmt.Println(err)
 		return
 	}
 
