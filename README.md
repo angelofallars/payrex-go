@@ -53,27 +53,27 @@ func main() {
 		),
 	})
 	if err != nil {
-		printPayrexError(err)
+		printError(err)
 		return
 	}
 	fmt.Printf("%+v\n", paymentIntent)
 
 	paymentIntent, err = payrexClient.PaymentIntents.Retrieve(paymentIntent.ID)
 	if err != nil {
-		printPayrexError(err)
+		printError(err)
 		return
 	}
 	fmt.Printf("%+v\n", paymentIntent)
 
 	paymentIntent, err = payrexClient.PaymentIntents.Cancel(paymentIntent.ID)
 	if err != nil {
-		printPayrexError(err)
+		printError(err)
 		return
 	}
 	fmt.Printf("%+v\n", paymentIntent)
 }
 
-func printPayrexError(err error) {
+func printError(err error) {
 	var payrexError payrex.Error
 	if !errors.As(err, &payrexError) {
 		return
