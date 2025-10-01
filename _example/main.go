@@ -20,6 +20,7 @@ func main() {
 
 	paymentIntent, err = payrexClient.PaymentIntents.Create(&payrex.CreatePaymentIntentOptions{
 		Amount:         10000,
+		Currency:       payrex.CurrencyPHP,
 		Description:    payrex.Optional("Dino Treat"),
 		PaymentMethods: []payrex.PaymentMethod{payrex.PaymentMethodGCash},
 	})
