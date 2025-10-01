@@ -53,7 +53,7 @@ const (
 // ServicePayments provides methods to interact with [Payment] resources, available in the [Client].Payments field.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payments
-type ServicePayments service
+type ServicePayments struct{ service }
 
 const pathPayments = "payments"
 

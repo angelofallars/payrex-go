@@ -18,7 +18,7 @@ type Customer struct {
 // ServiceCustomers provides methods to interact with [Customer] resources, available in the [Client].Customers field.
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers
-type ServiceCustomers service
+type ServiceCustomers struct{ service }
 
 const pathCustomers = "customers"
 

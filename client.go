@@ -66,8 +66,8 @@ func init() {
 
 		if _, ok := serviceField.(serviceProvider); !ok {
 			panic(fmt.Sprintf(
-				"expected service field '%s' in Client to implement 'serviceProvider'",
-				field.Type.Name(),
+				"expected field 'Client.%s' of type '%s' to implement 'serviceProvider'",
+				field.Name, field.Type.Name(),
 			))
 		}
 
