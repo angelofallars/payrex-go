@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
+
+	"github.com/angelofallars/payrex-go/internal/query"
 )
 
 // request makes a request to the PayRex API with the given payload,
@@ -18,18 +20,18 @@ func request[T any](client *Client, method method, path urlPath, payload any) (*
 
 	isPayloadNil := payload == nil || (reflect.ValueOf(payload).Kind() == reflect.Pointer && reflect.ValueOf(payload).IsNil())
 	if !isPayloadNil {
-		query := buildQuery(payload)
+		encodedPayload := query.Encode(payload)
 
 		switch method {
 		// Put payload in request body
 		case methodPOST, methodPUT:
 			req, err = http.NewRequest(string(method), reqURL,
-				bytes.NewBuffer([]byte(query)))
+				bytes.NewBuffer([]byte(encodedPayload)))
 		// Put payload in query parameters
 		default:
 			req, err = http.NewRequest(string(method), reqURL,
 				nil)
-			req.URL.RawQuery = query
+			req.URL.RawQuery = encodedPayload
 		}
 	} else {
 		req, err = http.NewRequest(string(method), reqURL,

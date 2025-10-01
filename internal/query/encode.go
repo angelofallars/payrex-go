@@ -1,4 +1,5 @@
-package payrex
+// Package query provides functionality to parse a struct into URL query values.
+package query
 
 import (
 	"fmt"
@@ -6,9 +7,9 @@ import (
 	"reflect"
 )
 
-// buildQuery returns a URL encoded version of a struct value
+// Encode returns a URL encoded version of a struct value
 // using `query:"<value>"` tags.
-func buildQuery(params any) string {
+func Encode(params any) string {
 	return buildQueryRecursive(params, "").Encode()
 }
 
