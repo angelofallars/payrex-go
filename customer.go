@@ -1,6 +1,8 @@
 package payrex
 
-// Customer represents the customer of your business. A customer could be a person or a company. Use this resource to track payments that belong to the same customer.
+// Customer represents the customer of your business.
+// A customer could be a person or a company.
+// Use this resource to track payments that belong to the same customer.
 //
 // Service: [ServiceCustomers]
 //

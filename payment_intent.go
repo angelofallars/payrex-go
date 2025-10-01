@@ -1,6 +1,7 @@
 package payrex
 
-// PaymentIntent tracks the customer's payment lifecycle, keeping track of any failed payment attempts and ensuring the customer is only charged once.
+// PaymentIntent tracks the customer's payment lifecycle, keeping track of
+// any failed payment attempts and ensuring the customer is only charged once.
 //
 // Service: [ServicePaymentIntents]
 //
