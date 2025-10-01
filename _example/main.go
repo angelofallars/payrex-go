@@ -12,10 +12,13 @@ func main() {
 	payrexClient := payrex.NewClient(os.Getenv("PAYREX_API_KEY"))
 
 	paymentIntent, err := payrexClient.PaymentIntents.Create(&payrex.CreatePaymentIntentOptions{
-		Amount:         10000,
-		Currency:       payrex.CurrencyPHP,
-		Description:    payrex.Optional("Dino Treat"),
-		PaymentMethods: []payrex.PaymentMethod{payrex.PaymentMethodGCash},
+		Amount:      10000,
+		Currency:    payrex.CurrencyPHP,
+		Description: payrex.Optional("Dino Treat"),
+		PaymentMethods: []payrex.PaymentMethod{
+			payrex.PaymentMethodGCash,
+			payrex.PaymentMethodMaya,
+		},
 	})
 	if err != nil {
 		printPayrexError(err)
