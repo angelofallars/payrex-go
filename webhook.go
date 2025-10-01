@@ -72,10 +72,7 @@ func (s *ServiceWebhooks) Update(id string, options *UpdateWebhookOptions) (*Web
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/enable
 func (s *ServiceWebhooks) Enable(id string) (*Webhook, error) {
-	return s.post(
-		s.path.make(id, "enable"),
-		nil,
-	)
+	return s.postID(id, "enable", nil)
 }
 
 // Disable disables a webhook resource by ID.
@@ -84,10 +81,7 @@ func (s *ServiceWebhooks) Enable(id string) (*Webhook, error) {
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/disable
 func (s *ServiceWebhooks) Disable(id string) (*Webhook, error) {
-	return s.post(
-		s.path.make(id, "disable"),
-		nil,
-	)
+	return s.postID(id, "disable", nil)
 }
 
 // Delete deletes a webhook resource by ID.

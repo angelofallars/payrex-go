@@ -56,6 +56,10 @@ func (s *service[T]) post(path urlPath, options any) (*T, error) {
 	)
 }
 
+func (s *service[T]) postID(id string, path urlPath, options any) (*T, error) {
+	return s.post(s.path.make(id, string(path)), options)
+}
+
 func (s *service[T]) put(path urlPath, options any) (*T, error) {
 	return request[T](s.client,
 		methodPUT,

@@ -60,10 +60,7 @@ func (s *ServicePaymentIntents) setup() {
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/cancel
 func (s *ServicePaymentIntents) Cancel(id string) (*PaymentIntent, error) {
-	return s.post(
-		s.path.make(id, "cancel"),
-		nil,
-	)
+	return s.postID(id, "cancel", nil)
 }
 
 // Capture captures a PaymentIntent resource by ID.
@@ -76,10 +73,7 @@ func (s *ServicePaymentIntents) Capture(id string, options *CapturePaymentIntent
 		return nil, ErrNilOption
 	}
 
-	return s.post(
-		s.path.make(id, "capture"),
-		options,
-	)
+	return s.postID(id, "capture", nil)
 }
 
 // Create creates a PaymentIntent resource.
