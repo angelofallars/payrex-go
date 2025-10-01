@@ -1,18 +1,11 @@
 # payrex-go
 
-The payrex-go library provides Go applications easy access to the [PayRex](https://www.payrexhq.com/) API.
+[![GoDoc](https://pkg.go.dev/badge/github.com/angelofallars/payrex-go?status.svg)](https://pkg.go.dev/github.com/angelofallars/payrex-go?tab=doc)
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/angelofallars/payrex-go/go.yml?cacheSeconds=30)](https://github.com/angelofallars/payrex-go/actions)
+[![License](https://img.shields.io/github/license/angelofallars/payrex-go)](./LICENSE)
+[![Stars](https://img.shields.io/github/stars/angelofallars/payrex-go)](https://github.com/angelofallars/payrex-go/stargazers)
 
-Progress on implemented resources:
-- [ ] Billing Statement Line Items
-- [ ] Billing Statements
-- [ ] Checkout Sessions
-- [ ] Customer Sessions
-- [x] Customers
-- [x] Payment Intents
-- [x] Payments
-- [ ] Payouts
-- [ ] Refunds
-- [ ] Webhooks
+Gain easy powerful access to the [PayRex](https://www.payrexhq.com/) API in Go with the payrex-go library. 
 
 ## Installation
 
@@ -82,6 +75,20 @@ func printPayrexError(err error) {
 	}
 }
 ```
+
+### WIP progress
+
+Progress on implemented resources:
+- [ ] Billing Statement Line Items
+- [ ] Billing Statements
+- [ ] Checkout Sessions
+- [ ] Customer Sessions
+- [x] Customers
+- [x] Payment Intents
+- [x] Payments
+- [ ] Payouts
+- [ ] Refunds
+- [ ] Webhooks
 
 ## Additional resources
 
