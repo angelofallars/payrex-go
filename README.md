@@ -16,16 +16,18 @@ Progress on implemented resources:
 
 ## Installation
 
-Use `go get`..
+Use `go get` in your Go project to install the library:
 
 ```sh
 go get github.com/angelofallars/payrex-go
 ```
 
-Then import payrex-go:
+Then import the library:
 
 ```go
-import "github.com/angelofallars/payrex-go"
+import (
+  "github.com/angelofallars/payrex-go"
+)
 ```
 
 ## Getting started
