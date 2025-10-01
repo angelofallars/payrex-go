@@ -29,7 +29,7 @@ type Billing struct {
 	Name    string  `json:"name"`
 	Email   string  `json:"email"`
 	Phone   *string `json:"phone"`
-	address Address
+	Address Address `json:"address"`
 }
 
 type Address struct {
