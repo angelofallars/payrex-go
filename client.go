@@ -12,9 +12,6 @@ const apiBaseURL = "https://api.payrexhq.com"
 
 // Client is the main type for interacting with the PayRex API.
 type Client struct {
-	apiKey     string
-	httpClient http.Client
-
 	Customers      ServiceCustomers
 	PaymentIntents ServicePaymentIntents
 	Payments       ServicePayments
@@ -26,6 +23,9 @@ type Client struct {
 	//
 	// Only override this if you know what you are doing.
 	APIBaseURL string
+
+	apiKey     string
+	httpClient http.Client
 }
 
 // NewClient creates a new [Client] instance.
