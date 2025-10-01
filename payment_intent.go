@@ -51,7 +51,8 @@ func (s *ServicePaymentIntents) setup() {
 
 // Cancel cancels a PaymentIntent resource by ID.
 //
-// A payment intent with a status of canceled means your customer cannot proceed with paying the particular payment intent.
+// A payment intent with a status of canceled means your customer
+// cannot proceed with paying the particular payment intent.
 //
 // You can only cancel a payment intent with status 'awaiting_payment_method'.
 //
