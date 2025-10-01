@@ -17,7 +17,8 @@ type Customer struct {
 	NextBillingStatementSequenceNumber string             `json:"next_billing_statement_sequence_number"`
 }
 
-// ServiceCustomers provides methods to interact with [Customer] resources, available in the [Client].Customers field.
+// ServiceCustomers provides methods to interact with [Customer] resources,
+// available in the [Client].Customers field.
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers
 type ServiceCustomers struct{ service[Customer] }
