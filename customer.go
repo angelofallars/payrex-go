@@ -20,7 +20,9 @@ type Customer struct {
 // API reference: https://docs.payrexhq.com/docs/api/customers
 type ServiceCustomers struct{ service }
 
-const pathCustomers = "customers"
+func (s *ServiceCustomers) setup() {
+	s.path = prefix("/customers")
+}
 
 // Create creates a customer resource.
 //
@@ -34,7 +36,7 @@ func (s *ServiceCustomers) Create(options *CreateCustomerOptions) (*Customer, er
 
 	return request[Customer](s.client,
 		methodPOST,
-		makePath(pathCustomers),
+		s.path.make(),
 		options,
 	)
 }
@@ -47,7 +49,7 @@ func (s *ServiceCustomers) Create(options *CreateCustomerOptions) (*Customer, er
 func (s *ServiceCustomers) Retrieve(id string) (*Customer, error) {
 	return request[Customer](s.client,
 		methodGET,
-		makePath(pathCustomers, id),
+		s.path.make(id),
 		nil,
 	)
 }
@@ -60,7 +62,7 @@ func (s *ServiceCustomers) Retrieve(id string) (*Customer, error) {
 func (s *ServiceCustomers) List(options *ListCustomersOptions) (*Listing[Customer], error) {
 	return request[Listing[Customer]](s.client,
 		methodGET,
-		makePath(pathCustomers),
+		s.path.make(),
 		options,
 	)
 }
@@ -77,7 +79,7 @@ func (s *ServiceCustomers) Update(id string, options *UpdateCustomerOptions) (*C
 
 	return request[Customer](s.client,
 		methodPUT,
-		makePath(pathCustomers, id),
+		s.path.make(id),
 		options,
 	)
 }
@@ -92,7 +94,7 @@ func (s *ServiceCustomers) Update(id string, options *UpdateCustomerOptions) (*C
 func (s *ServiceCustomers) Delete(id string) (*DeletedResource, error) {
 	return request[DeletedResource](s.client,
 		methodDELETE,
-		makePath(pathCustomers, id),
+		s.path.make(id),
 		nil,
 	)
 }

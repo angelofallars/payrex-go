@@ -55,7 +55,9 @@ const (
 // API reference: https://docs.payrexhq.com/docs/api/payments
 type ServicePayments struct{ service }
 
-const pathPayments = "payments"
+func (s *ServicePayments) setup() {
+	s.path = prefix("/payments")
+}
 
 // Retrieve retrieves a Payment resource by ID.
 //
@@ -65,7 +67,7 @@ const pathPayments = "payments"
 func (s *ServicePayments) Retrieve(id string) (*Payment, error) {
 	return request[Payment](s.client,
 		methodGET,
-		makePath(pathPayments, id),
+		s.path.make(id),
 		nil,
 	)
 }
@@ -82,7 +84,7 @@ func (s *ServicePayments) Update(id string, options *UpdatePaymentOptions) (*Pay
 
 	return request[Payment](s.client,
 		methodPUT,
-		makePath(pathCustomers, id),
+		s.path.make(id),
 		options,
 	)
 }

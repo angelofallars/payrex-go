@@ -43,7 +43,9 @@ type PaymentIntentNextAction struct {
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents
 type ServicePaymentIntents struct{ service }
 
-const pathPaymentIntents = "payment_intents"
+func (s *ServicePaymentIntents) setup() {
+	s.path = prefix("/payment_intents")
+}
 
 // Cancel cancels a PaymentIntent resource by ID.
 //
@@ -57,7 +59,7 @@ const pathPaymentIntents = "payment_intents"
 func (s *ServicePaymentIntents) Cancel(id string) (*PaymentIntent, error) {
 	return request[PaymentIntent](s.client,
 		methodPOST,
-		makePath(pathPaymentIntents, id, "cancel"),
+		s.path.make(id, "cancel"),
 		nil,
 	)
 }
@@ -74,7 +76,7 @@ func (s *ServicePaymentIntents) Capture(id string, options *CapturePaymentIntent
 
 	return request[PaymentIntent](s.client,
 		methodPOST,
-		makePath(pathPaymentIntents, id, "capture"),
+		s.path.make(id, "capture"),
 		options,
 	)
 }
@@ -91,7 +93,7 @@ func (s *ServicePaymentIntents) Create(options *CreatePaymentIntentOptions) (*Pa
 
 	return request[PaymentIntent](s.client,
 		methodPOST,
-		makePath(pathPaymentIntents),
+		s.path.make(),
 		options,
 	)
 }
@@ -104,7 +106,7 @@ func (s *ServicePaymentIntents) Create(options *CreatePaymentIntentOptions) (*Pa
 func (s *ServicePaymentIntents) Retrieve(id string) (*PaymentIntent, error) {
 	return request[PaymentIntent](s.client,
 		methodGET,
-		makePath(pathPaymentIntents, id),
+		s.path.make(id),
 		nil,
 	)
 }

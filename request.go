@@ -11,8 +11,8 @@ import (
 
 // request makes a request to the PayRex API with the given payload,
 // and returns the JSON response parsed into a value.
-func request[T any](client *Client, method method, path string, payload any) (*T, error) {
-	reqURL := client.APIBaseURL + "/" + path
+func request[T any](client *Client, method method, path urlPath, payload any) (*T, error) {
+	reqURL := client.APIBaseURL + string(path)
 
 	var req *http.Request
 	var err error

@@ -61,7 +61,9 @@ const (
 // API reference: https://docs.payrexhq.com/docs/api/payouts
 type ServicePayouts struct{ service }
 
-const pathPayouts = "payouts"
+func (s *ServicePayouts) setup() {
+	s.path = prefix("/payouts")
+}
 
 // ListTransactions lists payout transactions by [Payout] ID. The 'options' parameter can be nil.
 //
@@ -71,7 +73,7 @@ const pathPayouts = "payouts"
 func (s *ServicePayouts) ListTransactions(id string, options *ListPayoutTransactionsOptions) (*Listing[PayoutTransaction], error) {
 	return request[Listing[PayoutTransaction]](s.client,
 		methodGET,
-		makePath(pathPayouts, id, "transactions"),
+		s.path.make(id, "transactions"),
 		options,
 	)
 }

@@ -9,16 +9,19 @@ import (
 // service is the base type that all Service types embed.
 type service struct {
 	client *Client
+	path   pathPrefix
 }
 
-func (s *service) setupService(client *Client) {
+func (s *service) setupClient(client *Client) {
 	s.client = client
 }
 
 // serviceProvider is the interface that all Service types implement.
 type serviceProvider interface {
-	// setupService sets up the service by supplying it with the [Client].
-	setupService(client *Client)
+	// setupClient sets up the service by supplying it with the [Client].
+	setupClient(*Client)
+	// setup sets up the service's other data.
+	setup()
 }
 
 // setupServices sets up the Service fields.
@@ -28,7 +31,9 @@ func (c *Client) setupServices() {
 	v := reflect.ValueOf(c).Elem()
 	for _, fieldName := range serviceFieldNames {
 		service := v.FieldByName(fieldName).Addr().Interface().(serviceProvider)
-		service.setupService(c)
+
+		service.setupClient(c)
+		service.setup()
 	}
 }
 
