@@ -20,7 +20,7 @@ type PaymentIntent struct {
 	StatementDescriptor  string                   `json:"statement_descriptor"`
 	Status               PaymentIntentStatus      `json:"status"`
 	NextAction           *PaymentIntentNextAction `json:"next_action"`
-	ReturnURL            string                   `json:"return_url"`
+	ReturnURL            *string                  `json:"return_url"`
 }
 
 // PaymentIntentStatus enumerates the valid values for the [PaymentIntent].Status field.
