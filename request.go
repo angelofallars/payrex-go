@@ -16,7 +16,9 @@ func request[T any](client *Client, method method, path string, payload any) (*T
 
 	var req *http.Request
 	var err error
-	if payload != nil {
+
+	isPayloadNil := payload == nil || (reflect.ValueOf(payload).Kind() == reflect.Pointer && reflect.ValueOf(payload).IsNil())
+	if !isPayloadNil {
 		query := buildQuery(payload)
 
 		switch method {
