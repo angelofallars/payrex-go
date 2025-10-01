@@ -9,10 +9,7 @@ func (s *service[T]) create(options any) (*T, error) {
 		return nil, ErrNilOption
 	}
 
-	return s.post(
-		s.path.make(),
-		options,
-	)
+	return s.post(s.path.make(), options)
 }
 
 func (s *service[T]) retrieve(id string) (*T, error) {
@@ -28,10 +25,7 @@ func (s *service[T]) update(id string, options any) (*T, error) {
 		return nil, ErrNilOption
 	}
 
-	return s.put(
-		s.path.make(id),
-		options,
-	)
+	return s.put(s.path.make(id), options)
 }
 
 func (s *service[T]) delete(id string) (*DeletedResource, error) {
