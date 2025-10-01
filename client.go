@@ -2,10 +2,7 @@
 package payrex
 
 import (
-	"fmt"
 	"net/http"
-	"reflect"
-	"strings"
 )
 
 // Client is the main type for interacting with the PayRex API.
@@ -36,42 +33,7 @@ func NewClient(apiKey string) *Client {
 		APIBaseURL: apiBaseURL,
 	}
 
-	c.loadClient()
+	c.setupServices()
 
 	return c
-}
-
-// loadClient sets the unexported client field for each service implementing serviceProvider.
-func (c *Client) loadClient() {
-	// I use reflection here mainly just for convenience: whenever new services
-	// are added I can just add them as a field to Client and I don't have to do anything else.
-	v := reflect.ValueOf(c).Elem()
-	for _, fieldName := range serviceFieldNames {
-		service := v.FieldByName(fieldName).Addr().Interface().(serviceProvider)
-		service.setupService(c)
-	}
-}
-
-var serviceFieldNames []string = []string{}
-
-// init checks that all Service fields in the Client struct implement serviceProvider.
-func init() {
-	v := reflect.ValueOf(&Client{}).Elem()
-
-	for _, field := range reflect.VisibleFields(v.Type()) {
-		if !field.IsExported() || !strings.HasPrefix(field.Type.Name(), "Service") {
-			continue
-		}
-
-		serviceField := v.FieldByName(field.Name).Addr().Interface()
-
-		if _, ok := serviceField.(serviceProvider); !ok {
-			panic(fmt.Sprintf(
-				"expected field 'Client.%s' of type '%s' to implement 'serviceProvider'",
-				field.Name, field.Type.Name(),
-			))
-		}
-
-		serviceFieldNames = append(serviceFieldNames, field.Name)
-	}
 }
