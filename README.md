@@ -5,7 +5,9 @@
 [![License](https://img.shields.io/github/license/angelofallars/payrex-go)](./LICENSE)
 [![Stars](https://img.shields.io/github/stars/angelofallars/payrex-go)](https://github.com/angelofallars/payrex-go/stargazers)
 
-Gain easy powerful access to the [PayRex](https://www.payrexhq.com/) API in Go with the payrex-go library. 
+Gain easy powerful access to the [PayRex](https://www.payrexhq.com/) API in Go with the payrex-go SDK.
+
+This library is designed to have a similar interface to the [official PayRex SDKs](https://docs.payrexhq.com/docs/guide/developer_handbook/libraries_and_tools) for familiarity.
 
 ## Installation
 
