@@ -1,11 +1,11 @@
 package payrex
 
-// baseService is the base type that all Service types embed.
-type baseService struct {
+// service is the base type that all Service types embed.
+type service struct {
 	client *Client
 }
 
-func (s *baseService) setupService(client *Client) {
+func (s *service) setupService(client *Client) {
 	s.client = client
 }
 

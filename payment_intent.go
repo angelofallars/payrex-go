@@ -44,7 +44,7 @@ type PaymentIntentNextAction struct {
 // ServicePaymentIntents provides methods to interact with [PaymentIntent] resources, available in the [Client].PaymentIntents field.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents
-type ServicePaymentIntents struct{ baseService }
+type ServicePaymentIntents service
 
 const pathPaymentIntents = "payment_intents"
 
