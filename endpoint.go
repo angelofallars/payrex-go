@@ -1,5 +1,7 @@
 package payrex
 
+import "net/http"
+
 // Contains helper methods for common endpoint patterns.
 
 func (s *service[T]) create(options any) (*T, error) {
@@ -15,7 +17,7 @@ func (s *service[T]) create(options any) (*T, error) {
 
 func (s *service[T]) retrieve(id string) (*T, error) {
 	return request[T](s.client,
-		methodGET,
+		http.MethodGet,
 		s.path.make(id),
 		nil,
 	)
@@ -34,7 +36,7 @@ func (s *service[T]) update(id string, options any) (*T, error) {
 
 func (s *service[T]) delete(id string) (*DeletedResource, error) {
 	return request[DeletedResource](s.client,
-		methodDELETE,
+		http.MethodDelete,
 		s.path.make(id),
 		nil,
 	)
@@ -42,7 +44,7 @@ func (s *service[T]) delete(id string) (*DeletedResource, error) {
 
 func (s *service[T]) list(options any) (*Listing[T], error) {
 	return request[Listing[T]](s.client,
-		methodGET,
+		http.MethodGet,
 		s.path.make(),
 		options,
 	)
@@ -50,7 +52,7 @@ func (s *service[T]) list(options any) (*Listing[T], error) {
 
 func (s *service[T]) post(path urlPath, options any) (*T, error) {
 	return request[T](s.client,
-		methodPOST,
+		http.MethodPost,
 		path,
 		options,
 	)
@@ -62,7 +64,7 @@ func (s *service[T]) postID(id string, path urlPath, options any) (*T, error) {
 
 func (s *service[T]) put(path urlPath, options any) (*T, error) {
 	return request[T](s.client,
-		methodPUT,
+		http.MethodPut,
 		path,
 		options,
 	)

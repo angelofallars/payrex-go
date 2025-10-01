@@ -1,5 +1,7 @@
 package payrex
 
+import "net/http"
+
 // Payout resources are created when you are scheduled to receive money from PayRex.
 //
 // Payouts are made depending on the payout schedule for your PayRex merchant account.
@@ -73,7 +75,7 @@ func (s *ServicePayouts) setup() {
 // API reference: https://docs.payrexhq.com/docs/api/payout_transactions/list
 func (s *ServicePayouts) ListTransactions(id string, options *ListPayoutTransactionsOptions) (*Listing[PayoutTransaction], error) {
 	return request[Listing[PayoutTransaction]](s.client,
-		methodGET,
+		http.MethodGet,
 		s.path.make(id, "transactions"),
 		options,
 	)

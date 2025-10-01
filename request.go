@@ -12,7 +12,7 @@ import (
 
 // request makes a request to the PayRex API with the given payload,
 // and returns the JSON response parsed into a value.
-func request[T any](client *Client, method method, path urlPath, payload any) (*T, error) {
+func request[T any](client *Client, method string, path urlPath, payload any) (*T, error) {
 	reqURL := client.APIBaseURL + string(path)
 
 	var req *http.Request
@@ -24,7 +24,7 @@ func request[T any](client *Client, method method, path urlPath, payload any) (*
 
 		switch method {
 		// Put payload in request body
-		case methodPOST, methodPUT:
+		case http.MethodPost, http.MethodPut:
 			req, err = http.NewRequest(string(method), reqURL,
 				bytes.NewBuffer([]byte(encodedPayload)))
 		// Put payload in query parameters
