@@ -7,12 +7,12 @@ import (
 )
 
 // service is the base type that all Service types embed.
-type service struct {
+type service[T any] struct {
 	client *Client
 	path   pathPrefix
 }
 
-func (s *service) setupClient(client *Client) {
+func (s *service[T]) setupClient(client *Client) {
 	s.client = client
 }
 

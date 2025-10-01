@@ -41,7 +41,7 @@ type PaymentIntentNextAction struct {
 // ServicePaymentIntents provides methods to interact with [PaymentIntent] resources, available in the [Client].PaymentIntents field.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents
-type ServicePaymentIntents struct{ service }
+type ServicePaymentIntents struct{ service[PaymentIntent] }
 
 func (s *ServicePaymentIntents) setup() {
 	s.path = prefix("/payment_intents")
@@ -57,8 +57,7 @@ func (s *ServicePaymentIntents) setup() {
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/cancel
 func (s *ServicePaymentIntents) Cancel(id string) (*PaymentIntent, error) {
-	return request[PaymentIntent](s.client,
-		methodPOST,
+	return s.post(
 		s.path.make(id, "cancel"),
 		nil,
 	)
@@ -74,8 +73,7 @@ func (s *ServicePaymentIntents) Capture(id string, options *CapturePaymentIntent
 		return nil, ErrNilOption
 	}
 
-	return request[PaymentIntent](s.client,
-		methodPOST,
+	return s.post(
 		s.path.make(id, "capture"),
 		options,
 	)
@@ -87,15 +85,7 @@ func (s *ServicePaymentIntents) Capture(id string, options *CapturePaymentIntent
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/create
 func (s *ServicePaymentIntents) Create(options *CreatePaymentIntentOptions) (*PaymentIntent, error) {
-	if options == nil {
-		return nil, ErrNilOption
-	}
-
-	return request[PaymentIntent](s.client,
-		methodPOST,
-		s.path.make(),
-		options,
-	)
+	return s.create(options)
 }
 
 // Retrieve retrieves a PaymentIntent resource by ID.
@@ -104,11 +94,7 @@ func (s *ServicePaymentIntents) Create(options *CreatePaymentIntentOptions) (*Pa
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/retrieve
 func (s *ServicePaymentIntents) Retrieve(id string) (*PaymentIntent, error) {
-	return request[PaymentIntent](s.client,
-		methodGET,
-		s.path.make(id),
-		nil,
-	)
+	return s.retrieve(id)
 }
 
 // CapturePaymentIntentOptions contains options for the [ServicePaymentIntents.Capture] method.

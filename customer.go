@@ -18,7 +18,7 @@ type Customer struct {
 // ServiceCustomers provides methods to interact with [Customer] resources, available in the [Client].Customers field.
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers
-type ServiceCustomers struct{ service }
+type ServiceCustomers struct{ service[Customer] }
 
 func (s *ServiceCustomers) setup() {
 	s.path = prefix("/customers")
@@ -30,15 +30,7 @@ func (s *ServiceCustomers) setup() {
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/create
 func (s *ServiceCustomers) Create(options *CreateCustomerOptions) (*Customer, error) {
-	if options == nil {
-		return nil, ErrNilOption
-	}
-
-	return request[Customer](s.client,
-		methodPOST,
-		s.path.make(),
-		options,
-	)
+	return s.create(options)
 }
 
 // Retrieve retrieves a customer resource by ID.
@@ -47,11 +39,7 @@ func (s *ServiceCustomers) Create(options *CreateCustomerOptions) (*Customer, er
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/retrieve
 func (s *ServiceCustomers) Retrieve(id string) (*Customer, error) {
-	return request[Customer](s.client,
-		methodGET,
-		s.path.make(id),
-		nil,
-	)
+	return s.retrieve(id)
 }
 
 // List lists customers. The 'options' parameter can be nil.
@@ -60,11 +48,7 @@ func (s *ServiceCustomers) Retrieve(id string) (*Customer, error) {
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/list
 func (s *ServiceCustomers) List(options *ListCustomersOptions) (*Listing[Customer], error) {
-	return request[Listing[Customer]](s.client,
-		methodGET,
-		s.path.make(),
-		options,
-	)
+	return s.list(options)
 }
 
 // Update updates a customer resource by ID.
@@ -73,15 +57,7 @@ func (s *ServiceCustomers) List(options *ListCustomersOptions) (*Listing[Custome
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/update
 func (s *ServiceCustomers) Update(id string, options *UpdateCustomerOptions) (*Customer, error) {
-	if options == nil {
-		return nil, ErrNilOption
-	}
-
-	return request[Customer](s.client,
-		methodPUT,
-		s.path.make(id),
-		options,
-	)
+	return s.update(id, options)
 }
 
 // Delete deletes a customer resource by ID.
@@ -92,11 +68,7 @@ func (s *ServiceCustomers) Update(id string, options *UpdateCustomerOptions) (*C
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/delete
 func (s *ServiceCustomers) Delete(id string) (*DeletedResource, error) {
-	return request[DeletedResource](s.client,
-		methodDELETE,
-		s.path.make(id),
-		nil,
-	)
+	return s.delete(id)
 }
 
 // CreateCustomerOptions contains options for the [ServiceCustomers.Create] method.

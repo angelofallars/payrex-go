@@ -53,7 +53,7 @@ const (
 // ServicePayments provides methods to interact with [Payment] resources, available in the [Client].Payments field.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payments
-type ServicePayments struct{ service }
+type ServicePayments struct{ service[Payment] }
 
 func (s *ServicePayments) setup() {
 	s.path = prefix("/payments")
@@ -65,11 +65,7 @@ func (s *ServicePayments) setup() {
 //
 // API reference: https://docs.payrexhq.com/docs/api/payments/retrieve
 func (s *ServicePayments) Retrieve(id string) (*Payment, error) {
-	return request[Payment](s.client,
-		methodGET,
-		s.path.make(id),
-		nil,
-	)
+	return s.retrieve(id)
 }
 
 // Update updates a Payment resource by ID.
@@ -78,15 +74,7 @@ func (s *ServicePayments) Retrieve(id string) (*Payment, error) {
 //
 // API reference: https://docs.payrexhq.com/docs/api/payments/update
 func (s *ServicePayments) Update(id string, options *UpdatePaymentOptions) (*Payment, error) {
-	if options == nil {
-		return nil, ErrNilOption
-	}
-
-	return request[Payment](s.client,
-		methodPUT,
-		s.path.make(id),
-		options,
-	)
+	return s.update(id, options)
 }
 
 type UpdatePaymentOptions struct {

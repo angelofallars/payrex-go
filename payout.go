@@ -59,7 +59,7 @@ const (
 // ServicePayouts provides methods to interact with [Payout] and [PayoutTransaction] resources, available in the [Client].Payouts field.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payouts
-type ServicePayouts struct{ service }
+type ServicePayouts struct{ service[Payout] }
 
 func (s *ServicePayouts) setup() {
 	s.path = prefix("/payouts")
