@@ -19,10 +19,10 @@ func Slice[T any](values ...T) []T {
 	return values
 }
 
-// NotNilSlice returns a slice pointer containing all the passed in values.
+// SliceNotNil returns a slice pointer containing all the passed in values.
 //
 // Useful for assigning a slice literal to an Options struct's nullable slice field with type inference,
 // instead of manually declaring the slice's element type.
-func NotNilSlice[T any](values ...T) *[]T {
+func SliceNotNil[T any](values ...T) *[]T {
 	return &values
 }
