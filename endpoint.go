@@ -48,18 +48,18 @@ func (s *service[T]) list(options any) (*Listing[T], error) {
 	)
 }
 
-func (s *service[T]) post(path urlPath, payload any) (*T, error) {
+func (s *service[T]) post(path urlPath, options any) (*T, error) {
 	return request[T](s.client,
 		methodPOST,
 		path,
-		payload,
+		options,
 	)
 }
 
-func (s *service[T]) put(path urlPath, payload any) (*T, error) {
+func (s *service[T]) put(path urlPath, options any) (*T, error) {
 	return request[T](s.client,
 		methodPUT,
 		path,
-		payload,
+		options,
 	)
 }
