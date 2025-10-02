@@ -8,12 +8,13 @@ import (
 // Client manages interactions with the PayRex API.
 type Client struct {
 	// Services used for interacting with the different parts of the PayRex API.
-	Customers      ServiceCustomers
-	PaymentIntents ServicePaymentIntents
-	Payments       ServicePayments
-	Payouts        ServicePayouts
-	Refunds        ServiceRefunds
-	Webhooks       ServiceWebhooks
+	CheckoutSessions ServiceCheckoutSessions
+	Customers        ServiceCustomers
+	PaymentIntents   ServicePaymentIntents
+	Payments         ServicePayments
+	Payouts          ServicePayouts
+	Refunds          ServiceRefunds
+	Webhooks         ServiceWebhooks
 
 	apiBaseURL string
 	apiKey     string

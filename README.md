@@ -89,7 +89,7 @@ func main() {
 Progress on implemented resources:
 - [ ] Billing Statement Line Items
 - [ ] Billing Statements
-- [ ] Checkout Sessions
+- [x] Checkout Sessions
 - [ ] Customer Sessions
 - [x] Customers
 - [x] Payment Intents
