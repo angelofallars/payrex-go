@@ -21,7 +21,7 @@ type Client struct {
 	APIBaseURL string
 
 	apiKey     string
-	httpClient http.Client
+	httpClient *http.Client
 }
 
 // NewClient creates a new [Client] instance.
@@ -30,11 +30,17 @@ func NewClient(apiKey string) *Client {
 
 	c := &Client{
 		apiKey:     apiKey,
-		httpClient: http.Client{},
+		httpClient: &http.Client{},
 		APIBaseURL: apiBaseURL,
 	}
 
 	c.setupServices()
 
+	return c
+}
+
+// WithHTTPClient replaces the default HTTP client used for making requests.
+func (c *Client) WithHTTPClient(httpClient *http.Client) *Client {
+	c.httpClient = httpClient
 	return c
 }
