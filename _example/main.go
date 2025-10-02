@@ -1,8 +1,8 @@
 package main
 
 import (
-	"errors"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/angelofallars/payrex-go"
@@ -11,6 +11,7 @@ import (
 func main() {
 	payrexClient := payrex.NewClient(os.Getenv("PAYREX_API_KEY"))
 
+	// Create a PaymentIntent
 	paymentIntent, err := payrexClient.PaymentIntents.Create(&payrex.CreatePaymentIntentParams{
 		Amount:      100_00, // represents ₱100.00
 		Currency:    payrex.CurrencyPHP,
@@ -21,36 +22,28 @@ func main() {
 		),
 	})
 	if err != nil {
-		printError(err)
-		return
+		log.Fatal(err)
 	}
-	fmt.Printf("%+v\n", paymentIntent)
 
+	// Retrieve a PaymentIntent
 	paymentIntent, err = payrexClient.PaymentIntents.Retrieve(paymentIntent.ID)
 	if err != nil {
-		printError(err)
-		return
+		log.Fatal(err)
 	}
-	fmt.Printf("%+v\n", paymentIntent)
 
+	// Cancel a PaymentIntent
 	paymentIntent, err = payrexClient.PaymentIntents.Cancel(paymentIntent.ID)
 	if err != nil {
-		printError(err)
-		return
-	}
-	fmt.Printf("%+v\n", paymentIntent)
-}
-
-func printError(err error) {
-	var payrexError payrex.Error
-	if !errors.As(err, &payrexError) {
-		fmt.Println(err)
-		return
+		log.Fatal(err)
 	}
 
-	for _, errMsg := range payrexError.Errors {
-		fmt.Printf("code: %v\n", errMsg.Code)
-		fmt.Printf("detail: %v\n", errMsg.Detail)
-		fmt.Printf("parameters: %v\n", errMsg.Parameter)
+	// List customers
+	customers, err := payrexClient.Customers.List(nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, customer := range customers.Values {
+		fmt.Println(customer.Name)
 	}
 }
