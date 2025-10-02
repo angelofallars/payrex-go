@@ -73,7 +73,7 @@ func (s *ServicePaymentIntents) Capture(id string, params *CapturePaymentIntentP
 		return nil, ErrNilParams
 	}
 
-	return s.postID(id, "capture", nil)
+	return s.postID(id, "capture", params)
 }
 
 // Create creates a PaymentIntent resource.
