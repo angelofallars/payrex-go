@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-var ErrNilOption = errors.New("expected options argument to not be nil")
+var ErrNilParams = errors.New("expected params argument to not be nil")
 
 type Error struct {
 	Errors []ErrorMessage `json:"errors"`

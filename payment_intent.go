@@ -68,9 +68,9 @@ func (s *ServicePaymentIntents) Cancel(id string) (*PaymentIntent, error) {
 // Endpoint: POST /payment_intents/:id/capture
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/capture
-func (s *ServicePaymentIntents) Capture(id string, options *CapturePaymentIntentOptions) (*PaymentIntent, error) {
-	if options == nil {
-		return nil, ErrNilOption
+func (s *ServicePaymentIntents) Capture(id string, params *CapturePaymentIntentParams) (*PaymentIntent, error) {
+	if params == nil {
+		return nil, ErrNilParams
 	}
 
 	return s.postID(id, "capture", nil)
@@ -81,8 +81,8 @@ func (s *ServicePaymentIntents) Capture(id string, options *CapturePaymentIntent
 // Endpoint: POST /payment_intents
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/create
-func (s *ServicePaymentIntents) Create(options *CreatePaymentIntentOptions) (*PaymentIntent, error) {
-	return s.create(options)
+func (s *ServicePaymentIntents) Create(params *CreatePaymentIntentParams) (*PaymentIntent, error) {
+	return s.create(params)
 }
 
 // Retrieve retrieves a PaymentIntent resource by ID.
@@ -94,17 +94,17 @@ func (s *ServicePaymentIntents) Retrieve(id string) (*PaymentIntent, error) {
 	return s.retrieve(id)
 }
 
-// CapturePaymentIntentOptions contains options for the [ServicePaymentIntents.Capture] method.
+// CapturePaymentIntentParams represents the available [ServicePaymentIntents.Capture] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/capture
-type CapturePaymentIntentOptions struct {
+type CapturePaymentIntentParams struct {
 	Amount int `query:"amount"`
 }
 
-// CreatePaymentIntentOptions contains options for the [ServicePaymentIntents.Create] method.
+// CreatePaymentIntentParams represents the available [ServicePaymentIntents.Create] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/create
-type CreatePaymentIntentOptions struct {
+type CreatePaymentIntentParams struct {
 	Amount               int                   `query:"amount"`
 	PaymentMethods       []PaymentMethod       `query:"payment_methods"`
 	Currency             Currency              `query:"currency"`

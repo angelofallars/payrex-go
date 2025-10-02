@@ -35,8 +35,8 @@ func (s *ServiceWebhooks) setup() {
 // Endpoint: POST /webhooks
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/create
-func (s *ServiceWebhooks) Create(options *CreateWebhookOptions) (*Webhook, error) {
-	return s.create(options)
+func (s *ServiceWebhooks) Create(params *CreateWebhookParams) (*Webhook, error) {
+	return s.create(params)
 }
 
 // Retrieve retrieves a webhook resource by ID.
@@ -48,13 +48,13 @@ func (s *ServiceWebhooks) Retrieve(id string) (*Webhook, error) {
 	return s.retrieve(id)
 }
 
-// List lists webhooks. The 'options' parameter can be nil.
+// List lists webhooks. The 'params' parameter can be nil.
 //
 // Endpoint: GET /webhooks
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/list
-func (s *ServiceWebhooks) List(options *ListWebhooksOptions) (*Listing[Webhook], error) {
-	return s.list(options)
+func (s *ServiceWebhooks) List(params *ListWebhooksParams) (*Listing[Webhook], error) {
+	return s.list(params)
 }
 
 // Update updates a webhook resource by ID.
@@ -62,8 +62,8 @@ func (s *ServiceWebhooks) List(options *ListWebhooksOptions) (*Listing[Webhook],
 // Endpoint: PUT /webhooks/:id
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/update
-func (s *ServiceWebhooks) Update(id string, options *UpdateWebhookOptions) (*Webhook, error) {
-	return s.update(id, options)
+func (s *ServiceWebhooks) Update(id string, params *UpdateWebhookParams) (*Webhook, error) {
+	return s.update(id, params)
 }
 
 // Enable enables a webhook by ID.
@@ -93,28 +93,28 @@ func (s *ServiceWebhooks) Delete(id string) (*DeletedResource, error) {
 	return s.delete(id)
 }
 
-// CreateWebhookOptions contains options for the [ServiceWebhooks.Create] method.
+// CreateWebhookParams represents the available [ServiceWebhooks.Create] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/create
-type CreateWebhookOptions struct {
+type CreateWebhookParams struct {
 	URL         string  `query:"url"`
 	Description *string `query:"description"`
 	Events      []Event `query:"events"`
 }
 
-// UpdateWebhookOptions contains options for the [ServiceWebhooks.Update] method.
+// UpdateWebhookParams represents the available [ServiceWebhooks.Update] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/update
-type UpdateWebhookOptions struct {
+type UpdateWebhookParams struct {
 	URL         *string  `query:"url"`
 	Description *string  `query:"description"`
 	Events      *[]Event `query:"events"`
 }
 
-// ListWebhooksOptions contains options for the [ServiceWebhooks.List] method.
+// ListWebhooksParams represents the available [ServiceWebhooks.List] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/list
-type ListWebhooksOptions struct {
+type ListWebhooksParams struct {
 	Limit       *int    `query:"int"`
 	Before      *string `query:"before"`
 	After       *string `query:"after"`

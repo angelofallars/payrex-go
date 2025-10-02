@@ -1,6 +1,6 @@
 package payrex
 
-// Type definitions for common types used across several resources and options.
+// Type definitions for common types used across several resources and parameters.
 
 // Currency is a three-letter ISO currency code in uppercase.
 //

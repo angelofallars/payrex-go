@@ -1,10 +1,10 @@
 package payrex
 
-// Utility functions for library users to work with Options structs conveniently.
+// Utility functions for library users to work with Params structs conveniently.
 
 // NotNil returns a pointer to the given value of type T.
 //
-// Useful for passing in string/int literals to nullable *string/*int fields in Options structs.
+// Useful for passing in string/int literals to nullable *string/*int fields in Params structs.
 //
 // In Go 1.26 this will be unnecessary, as the new() function can now accept expressions.
 func NotNil[T any](v T) *T {
@@ -13,7 +13,7 @@ func NotNil[T any](v T) *T {
 
 // Slice returns a slice containing all the passed in values.
 //
-// Useful for assigning a slice literal to an Options struct's slice field with type inference,
+// Useful for assigning a slice literal to a Params struct's slice field with type inference,
 // instead of manually declaring the slice's element type.
 func Slice[T any](values ...T) []T {
 	return values
@@ -21,7 +21,7 @@ func Slice[T any](values ...T) []T {
 
 // SliceNotNil returns a slice pointer containing all the passed in values.
 //
-// Useful for assigning a slice literal to an Options struct's nullable slice field with type inference,
+// Useful for assigning a slice literal to a Params struct's nullable slice field with type inference,
 // instead of manually declaring the slice's element type.
 func SliceNotNil[T any](values ...T) *[]T {
 	return &values

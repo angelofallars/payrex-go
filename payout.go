@@ -68,23 +68,23 @@ func (s *ServicePayouts) setup() {
 	s.path = prefix("/payouts")
 }
 
-// ListTransactions lists payout transactions by [Payout] ID. The 'options' parameter can be nil.
+// ListTransactions lists payout transactions by [Payout] ID. The 'params' parameter can be nil.
 //
 // Endpoint: GET /payouts/:id/transactions
 //
 // API reference: https://docs.payrexhq.com/docs/api/payout_transactions/list
-func (s *ServicePayouts) ListTransactions(id string, options *ListPayoutTransactionsOptions) (*Listing[PayoutTransaction], error) {
+func (s *ServicePayouts) ListTransactions(id string, params *ListPayoutTransactionsParams) (*Listing[PayoutTransaction], error) {
 	return request[Listing[PayoutTransaction]](s.client,
 		http.MethodGet,
 		s.path.make(id, "transactions"),
-		options,
+		params,
 	)
 }
 
-// ListPayoutTransactionsOptions contains options for the [ServicePayouts.ListTransactions] method.
+// ListPayoutTransactionsParams represents the available [ServicePayouts.ListTransactions] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payout_transactions/list
-type ListPayoutTransactionsOptions struct {
+type ListPayoutTransactionsParams struct {
 	Limit  *int    `query:"limit"`
 	Before *string `query:"before"`
 	After  *string `query:"after"`
