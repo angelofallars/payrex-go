@@ -85,7 +85,7 @@ func (s *ServicePayouts) ListTransactions(id string, params *ListPayoutTransacti
 //
 // API reference: https://docs.payrexhq.com/docs/api/payout_transactions/list
 type ListPayoutTransactionsParams struct {
-	Limit  *int    `query:"limit"`
-	Before *string `query:"before"`
-	After  *string `query:"after"`
+	Limit  *int    `form:"limit"`
+	Before *string `form:"before"`
+	After  *string `form:"after"`
 }

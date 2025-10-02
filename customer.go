@@ -78,34 +78,34 @@ func (s *ServiceCustomers) Delete(id string) (*DeletedResource, error) {
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/create
 type CreateCustomerParams struct {
-	Currency                           Currency           `query:"currency"`
-	Name                               string             `query:"name"`
-	Email                              string             `query:"email"`
-	BillingStatementPrefix             *string            `query:"billing_statement_prefix"`
-	NextBillingStatementSequenceNumber *string            `query:"next_billing_statement_sequence_number"`
-	Metadata                           *map[string]string `query:"metadata"`
+	Currency                           Currency           `form:"currency"`
+	Name                               string             `form:"name"`
+	Email                              string             `form:"email"`
+	BillingStatementPrefix             *string            `form:"billing_statement_prefix"`
+	NextBillingStatementSequenceNumber *string            `form:"next_billing_statement_sequence_number"`
+	Metadata                           *map[string]string `form:"metadata"`
 }
 
 // ListCustomersParams represents the available [ServiceCustomers.List] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/list
 type ListCustomersParams struct {
-	Limit    *int               `query:"int"`
-	Before   *string            `query:"before"`
-	After    *string            `query:"after"`
-	Email    *string            `query:"email"`
-	Name     *string            `query:"name"`
-	Metadata *map[string]string `query:"metadata"`
+	Limit    *int               `form:"int"`
+	Before   *string            `form:"before"`
+	After    *string            `form:"after"`
+	Email    *string            `form:"email"`
+	Name     *string            `form:"name"`
+	Metadata *map[string]string `form:"metadata"`
 }
 
 // UpdateCustomerParams represents the available [ServiceCustomers.Update] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/update
 type UpdateCustomerParams struct {
-	Currency                           *Currency          `query:"currency"`
-	Name                               *string            `query:"name"`
-	Email                              *string            `query:"email"`
-	BillingStatementPrefix             *string            `query:"billing_statement_prefix"`
-	NextBillingStatementSequenceNumber *string            `query:"next_billing_statement_sequence_number"`
-	Metadata                           *map[string]string `query:"metadata"`
+	Currency                           *Currency          `form:"currency"`
+	Name                               *string            `form:"name"`
+	Email                              *string            `form:"email"`
+	BillingStatementPrefix             *string            `form:"billing_statement_prefix"`
+	NextBillingStatementSequenceNumber *string            `form:"next_billing_statement_sequence_number"`
+	Metadata                           *map[string]string `form:"metadata"`
 }

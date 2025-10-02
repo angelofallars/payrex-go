@@ -1,5 +1,5 @@
-// Package query provides functionality to parse a struct into URL query values.
-package query
+// Package form provides functionality to parse a struct into a URL-encoded string.
+package form
 
 import (
 	"fmt"
@@ -7,22 +7,22 @@ import (
 	"reflect"
 )
 
-// Encode returns a URL encoded version of a struct value
-// using `query:"<value>"` tags.
+// Encode returns the URL-encoded form of a struct value
+// using `form:"<value>"` tags.
 func Encode(params any) string {
-	return parseQueryParams(url.Values{}, "", reflect.ValueOf(params)).Encode()
+	return parseIntoForm(url.Values{}, "", reflect.ValueOf(params)).Encode()
 }
 
-func parseQueryParams(queryParams url.Values, key string, value reflect.Value) url.Values {
+func parseIntoForm(formValues url.Values, key string, value reflect.Value) url.Values {
 	switch value.Kind() {
 	case reflect.Struct:
 		valueType := value.Type()
 		for i := range value.NumField() {
 			field := valueType.Field(i)
 
-			tagKey := field.Tag.Get("query")
+			tagKey := field.Tag.Get("form")
 			if tagKey == "" {
-				panic(fmt.Sprintf("'query' tag on struct field '%s.%s' not set",
+				panic(fmt.Sprintf("'form' tag on struct field '%s.%s' not set",
 					valueType.Name(), field.Name))
 			}
 
@@ -32,14 +32,14 @@ func parseQueryParams(queryParams url.Values, key string, value reflect.Value) u
 			}
 			fieldValue := value.Field(i)
 
-			parseQueryParams(queryParams, fieldKey, fieldValue)
+			parseIntoForm(formValues, fieldKey, fieldValue)
 		}
 	case reflect.Slice:
 		for i := range value.Len() {
 			elem := value.Index(i)
 			elemKey := fmt.Sprintf("%s[]", key)
 
-			parseQueryParams(queryParams, elemKey, elem)
+			parseIntoForm(formValues, elemKey, elem)
 		}
 	case reflect.Map:
 		iter := reflect.ValueOf(value).MapRange()
@@ -51,18 +51,18 @@ func parseQueryParams(queryParams url.Values, key string, value reflect.Value) u
 				mapKey = fmt.Sprintf("%s[%s]", key, k.String())
 			}
 
-			parseQueryParams(queryParams, mapKey, v)
+			parseIntoForm(formValues, mapKey, v)
 		}
 	case reflect.Pointer:
-		// Null values will not be added to the query
+		// Null values will not be added to the form
 		if value.IsZero() {
-			return queryParams
+			return formValues
 		}
 
-		parseQueryParams(queryParams, key, value.Elem())
+		parseIntoForm(formValues, key, value.Elem())
 	default:
-		queryParams.Add(key, fmt.Sprintf("%v", value))
+		formValues.Add(key, fmt.Sprintf("%v", value))
 	}
 
-	return queryParams
+	return formValues
 }

@@ -98,16 +98,16 @@ func (s *ServicePaymentIntents) Retrieve(id string) (*PaymentIntent, error) {
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/capture
 type CapturePaymentIntentParams struct {
-	Amount int `query:"amount"`
+	Amount int `form:"amount"`
 }
 
 // CreatePaymentIntentParams represents the available [ServicePaymentIntents.Create] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/create
 type CreatePaymentIntentParams struct {
-	Amount               int                   `query:"amount"`
-	PaymentMethods       []PaymentMethod       `query:"payment_methods"`
-	Currency             Currency              `query:"currency"`
-	Description          *string               `query:"description"`
-	PaymentMethodOptions *PaymentMethodOptions `query:"payment_method_options"`
+	Amount               int                   `form:"amount"`
+	PaymentMethods       []PaymentMethod       `form:"payment_methods"`
+	Currency             Currency              `form:"currency"`
+	Description          *string               `form:"description"`
+	PaymentMethodOptions *PaymentMethodOptions `form:"payment_method_options"`
 }

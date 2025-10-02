@@ -26,13 +26,13 @@ const (
 )
 
 type PaymentMethodOptions struct {
-	Card Card `json:"card" query:"card"`
+	Card Card `json:"card" form:"card"`
 }
 
 type Card struct {
-	CaptureType    CaptureType       `json:"capture_type" query:"capture_type"`
-	AllowedBins    *[]string         `json:"allowed_bins" query:"allowed_bins"`
-	AllowedFunding *[]AllowedFunding `json:"allowed_funding" query:"allowed_funding"`
+	CaptureType    CaptureType       `json:"capture_type" form:"capture_type"`
+	AllowedBins    *[]string         `json:"allowed_bins" form:"allowed_bins"`
+	AllowedFunding *[]AllowedFunding `json:"allowed_funding" form:"allowed_funding"`
 }
 
 type CaptureType string

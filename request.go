@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"reflect"
 
-	"github.com/angelofallars/payrex-go/internal/query"
+	"github.com/angelofallars/payrex-go/internal/form"
 )
 
 // request makes a request to the PayRex API with the given payload,
@@ -20,7 +20,7 @@ func request[T any](client *Client, method string, path urlPath, payload any) (*
 
 	isPayloadNil := payload == nil || (reflect.ValueOf(payload).Kind() == reflect.Pointer && reflect.ValueOf(payload).IsNil())
 	if !isPayloadNil {
-		encodedPayload := query.Encode(payload)
+		encodedPayload := form.Encode(payload)
 
 		switch method {
 		// Put payload in request body

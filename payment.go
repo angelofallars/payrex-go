@@ -82,6 +82,6 @@ func (s *ServicePayments) Update(id string, params *UpdatePaymentParams) (*Payme
 //
 // API reference: https://docs.payrexhq.com/docs/api/payments/update
 type UpdatePaymentParams struct {
-	Description *string            `query:"description"`
-	Metadata    *map[string]string `query:"metadata"`
+	Description *string            `form:"description"`
+	Metadata    *map[string]string `form:"metadata"`
 }

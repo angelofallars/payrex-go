@@ -97,27 +97,27 @@ func (s *ServiceWebhooks) Delete(id string) (*DeletedResource, error) {
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/create
 type CreateWebhookParams struct {
-	URL         string  `query:"url"`
-	Description *string `query:"description"`
-	Events      []Event `query:"events"`
+	URL         string  `form:"url"`
+	Description *string `form:"description"`
+	Events      []Event `form:"events"`
 }
 
 // UpdateWebhookParams represents the available [ServiceWebhooks.Update] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/update
 type UpdateWebhookParams struct {
-	URL         *string  `query:"url"`
-	Description *string  `query:"description"`
-	Events      *[]Event `query:"events"`
+	URL         *string  `form:"url"`
+	Description *string  `form:"description"`
+	Events      *[]Event `form:"events"`
 }
 
 // ListWebhooksParams represents the available [ServiceWebhooks.List] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/list
 type ListWebhooksParams struct {
-	Limit       *int    `query:"int"`
-	Before      *string `query:"before"`
-	After       *string `query:"after"`
-	URL         *string `query:"url"`
-	Description *string `query:"description"`
+	Limit       *int    `form:"int"`
+	Before      *string `form:"before"`
+	After       *string `form:"after"`
+	URL         *string `form:"url"`
+	Description *string `form:"description"`
 }
