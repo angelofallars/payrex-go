@@ -12,6 +12,7 @@ type Client struct {
 	PaymentIntents ServicePaymentIntents
 	Payments       ServicePayments
 	Payouts        ServicePayouts
+	Refunds        ServiceRefunds
 	Webhooks       ServiceWebhooks
 
 	apiBaseURL string
