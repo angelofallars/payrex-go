@@ -13,13 +13,7 @@ type Client struct {
 	Payouts        ServicePayouts
 	Webhooks       ServiceWebhooks
 
-	// The base URL to make requests to.
-	//
-	// Default URL is https://api.payrexhq.com
-	//
-	// Only override this if you know what you are doing.
-	APIBaseURL string
-
+	apiBaseURL string
 	apiKey     string
 	httpClient *http.Client
 }
@@ -29,9 +23,9 @@ func NewClient(apiKey string) *Client {
 	const apiBaseURL = "https://api.payrexhq.com"
 
 	c := &Client{
+		apiBaseURL: apiBaseURL,
 		apiKey:     apiKey,
 		httpClient: &http.Client{},
-		APIBaseURL: apiBaseURL,
 	}
 
 	c.setupServices()
