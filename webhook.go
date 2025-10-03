@@ -1,5 +1,10 @@
 package payrex
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // Webhook is used to notify your application about events in your PayRex account.
 //
 // Service: [ServiceWebhooks]
@@ -93,6 +98,74 @@ func (s *ServiceWebhooks) Disable(id string) (*Webhook, error) {
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/delete
 func (s *ServiceWebhooks) Delete(id string) (*DeletedResource, error) {
 	return s.delete(id)
+}
+
+// ParseEvent parses an event from a PayRex webhook.
+//
+// Reference: https://docs.payrexhq.com/docs/guide/developer_handbook/webhooks
+func (s *ServiceWebhooks) ParseEvent(payload []byte, signatureHeader, webhookSecretKey string) (*Event, error) {
+	// TODO: authenticate event with signatureHeader and webhookSecretKey
+
+	// eventWithResourceName is used to parse the resource name of an [Event].
+	type eventWithResourceName struct {
+		Data struct {
+			Resource string `json:"resource"`
+		} `json:"data"`
+	}
+
+	// eventWithResource is used to parse the resource type of an [Event].
+	type eventWithResource[T any] struct {
+		Data T `json:"data"`
+	}
+
+	var event Event
+	if err := json.Unmarshal(payload, &event); err != nil {
+		return nil, fmt.Errorf("could not decode event: %w", err)
+	}
+
+	var resourceNameContainer eventWithResourceName
+	if err := json.Unmarshal(payload, &resourceNameContainer); err != nil {
+		return nil, fmt.Errorf("could not decode event resource: %w", err)
+	}
+
+	resourceName := resourceNameContainer.Data.Resource
+
+	switch resourceName {
+	case "billing_statement":
+		var resourceContainer eventWithResource[BillingStatement]
+		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
+			return nil, fmt.Errorf("could not decode billing statement: %w", err)
+		}
+		event.billingStatement = &resourceContainer.Data
+	case "checkout_session":
+		var resourceContainer eventWithResource[CheckoutSession]
+		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
+			return nil, fmt.Errorf("could not decode checkout session: %w", err)
+		}
+		event.checkoutSession = &resourceContainer.Data
+	case "payment_intent":
+		var resourceContainer eventWithResource[PaymentIntent]
+		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
+			return nil, fmt.Errorf("could not decode payment intent: %w", err)
+		}
+		event.paymentIntent = &resourceContainer.Data
+	case "payout":
+		var resourceContainer eventWithResource[Payout]
+		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
+			return nil, fmt.Errorf("could not decode payout: %w", err)
+		}
+		event.payout = &resourceContainer.Data
+	case "refund":
+		var resourceContainer eventWithResource[Refund]
+		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
+			return nil, fmt.Errorf("could not decode refund: %w", err)
+		}
+		event.refund = &resourceContainer.Data
+	default:
+		return nil, fmt.Errorf("unrecognized event resource: '%s'", resourceName)
+	}
+
+	return &event, nil
 }
 
 // WebhookCreateParams represents the available [ServiceWebhooks.Create] parameters.
