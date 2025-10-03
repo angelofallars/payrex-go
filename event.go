@@ -11,7 +11,8 @@ type Event struct {
 	BaseResource
 	Type EventType `json:"type"`
 	// The name of the type of resource associated with this event.
-	ResourceName       EventResourceType
+	// Corresponds to the first part of the Type.
+	ResourceType       EventResourceType
 	PendingWebhooks    int            `json:"pending_webhooks"`
 	PreviousAttributes map[string]any `json:"previous_attributes"`
 
@@ -176,10 +177,10 @@ const (
 // EventResourceType enumerates the types of resources that an [Event]
 // can have.
 //
-// When an Event.ResourceName field matches one of the values here, it's safe to call the
+// When an Event.ResourceType field matches one of the values here, it's safe to call the
 // corresponding Event.Must<Resource>() method.
 //
-// For example, if the Event.ResourceName is [EventResourceTypeBillingStatement], you can
+// For example, if the Event.ResourceType is [EventResourceTypeBillingStatement], you can
 // call [Event.MustBillingStatement] without issues.
 type EventResourceType string
 
