@@ -87,8 +87,9 @@ func main() {
 ### WIP progress
 
 Progress on implemented resources:
+
 - [x] Billing Statement Line Items
-- [ ] Billing Statements
+- [x] Billing Statements
 - [x] Checkout Sessions
 - [x] Customer Sessions
 - [x] Customers
@@ -97,6 +98,8 @@ Progress on implemented resources:
 - [x] Payouts
 - [x] Refunds
 - [x] Webhooks
+
+All done!
 
 ## Additional resources
 
