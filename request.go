@@ -25,17 +25,14 @@ func request[T any](client *Client, method string, path urlPath, payload any) (*
 		switch method {
 		// Put payload in request body
 		case http.MethodPost, http.MethodPut:
-			req, err = http.NewRequest(string(method), reqURL,
-				bytes.NewBuffer([]byte(encodedPayload)))
+			req, err = http.NewRequest(string(method), reqURL, bytes.NewBuffer([]byte(encodedPayload)))
 		// Put payload in query parameters
 		default:
-			req, err = http.NewRequest(string(method), reqURL,
-				nil)
+			req, err = http.NewRequest(string(method), reqURL, nil)
 			req.URL.RawQuery = encodedPayload
 		}
 	} else {
-		req, err = http.NewRequest(string(method), reqURL,
-			nil)
+		req, err = http.NewRequest(string(method), reqURL, nil)
 	}
 
 	if err != nil {
