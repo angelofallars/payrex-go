@@ -87,7 +87,7 @@ func main() {
 ### WIP progress
 
 Progress on implemented resources:
-- [ ] Billing Statement Line Items
+- [x] Billing Statement Line Items
 - [ ] Billing Statements
 - [x] Checkout Sessions
 - [x] Customer Sessions
