@@ -45,6 +45,10 @@ func request[T any](client *Client, method string, path urlPath, payload any) (*
 	req.SetBasicAuth(client.apiKey, "")
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
+	const userAgentName = "payrex-go"
+	const userAgentVersion = "0.0.1"
+	req.Header.Set("User-Agent", userAgentName+"/"+userAgentVersion)
+
 	res, err := client.httpClient.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("could not do request: %w", err)
