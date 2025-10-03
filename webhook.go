@@ -9,7 +9,7 @@ type Webhook struct {
 	Status      WebhookStatus `json:"status"`
 	Description *string       `json:"description"`
 	URL         string        `json:"url"`
-	Events      []Event       `json:"events"`
+	Events      []EventType   `json:"events"`
 }
 
 // WebhookStatus enumerates the valid values for the [Webhook].Status field.
@@ -97,18 +97,18 @@ func (s *ServiceWebhooks) Delete(id string) (*DeletedResource, error) {
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/create
 type CreateWebhookParams struct {
-	URL         string  `form:"url"`
-	Description *string `form:"description"`
-	Events      []Event `form:"events"`
+	URL         string      `form:"url"`
+	Description *string     `form:"description"`
+	Events      []EventType `form:"events"`
 }
 
 // UpdateWebhookParams represents the available [ServiceWebhooks.Update] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/update
 type UpdateWebhookParams struct {
-	URL         *string  `form:"url"`
-	Description *string  `form:"description"`
-	Events      *[]Event `form:"events"`
+	URL         *string      `form:"url"`
+	Description *string      `form:"description"`
+	Events      *[]EventType `form:"events"`
 }
 
 // ListWebhooksParams represents the available [ServiceWebhooks.List] parameters.

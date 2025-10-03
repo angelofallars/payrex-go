@@ -1,5 +1,5 @@
 package payrex
 
-type Event string
+type EventType string
 
 // TODO: Event values

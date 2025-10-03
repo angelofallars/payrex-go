@@ -92,18 +92,18 @@ func (s *ServiceCheckoutSessions) Expire(id string) (*CheckoutSession, error) {
 //
 // API reference: https://docs.payrexhq.com/docs/api/checkout_sessions/create
 type CreateCheckoutSessionParams struct {
-	URL         string  `form:"url"`
-	Description *string `form:"description"`
-	Events      []Event `form:"events"`
+	URL         string      `form:"url"`
+	Description *string     `form:"description"`
+	Events      []EventType `form:"events"`
 }
 
 // UpdateCheckoutSessionParams represents the available [ServiceCheckoutSessions.Update] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/checkout_sessions/update
 type UpdateCheckoutSessionParams struct {
-	URL         *string  `form:"url"`
-	Description *string  `form:"description"`
-	Events      *[]Event `form:"events"`
+	URL         *string      `form:"url"`
+	Description *string      `form:"description"`
+	Events      *[]EventType `form:"events"`
 }
 
 // ListCheckoutSessionsParams represents the available [ServiceCheckoutSessions.List] parameters.
