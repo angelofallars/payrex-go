@@ -34,7 +34,7 @@ type BillingStatement struct {
 // PaymentSettings lists fields that can modify the behavior of the payment processing for a [BillingStatement].
 type PaymentSettings struct {
 	// The list of [PaymentMethod] values allowed to be processed by the [PaymentIntent] of a [BillingStatement].
-	PaymentMethods []PaymentMethod `json:"payment_methods"`
+	PaymentMethods []PaymentMethod `json:"payment_methods" form:"payment_methods"`
 }
 
 // BillingStatementStatus enumerates the valid values for the [BillingStatement].Status field.
