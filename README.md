@@ -90,7 +90,7 @@ Progress on implemented resources:
 - [ ] Billing Statement Line Items
 - [ ] Billing Statements
 - [x] Checkout Sessions
-- [ ] Customer Sessions
+- [x] Customer Sessions
 - [x] Customers
 - [x] Payment Intents
 - [x] Payments

@@ -9,6 +9,7 @@ import (
 type Client struct {
 	// Services used for interacting with the different parts of the PayRex API.
 	CheckoutSessions ServiceCheckoutSessions
+	CustomerSessions ServiceCustomerSessions
 	Customers        ServiceCustomers
 	PaymentIntents   ServicePaymentIntents
 	Payments         ServicePayments
