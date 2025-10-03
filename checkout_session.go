@@ -2,6 +2,8 @@ package payrex
 
 // CheckoutSession is used to notify your application about events in your PayRex account.
 //
+// Service: [ServiceCheckoutSessions]
+//
 // API reference: https://docs.payrexhq.com/docs/api/checkout_sessions
 type CheckoutSession struct {
 	BaseResource

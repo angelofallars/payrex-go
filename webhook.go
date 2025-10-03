@@ -2,6 +2,8 @@ package payrex
 
 // Webhook is used to notify your application about events in your PayRex account.
 //
+// Service: [ServiceWebhooks]
+//
 // API reference: https://docs.payrexhq.com/docs/api/webhooks
 type Webhook struct {
 	BaseResource

@@ -6,6 +6,8 @@ import "net/http"
 //
 // Payouts are made depending on the payout schedule for your PayRex merchant account.
 //
+// Service: [ServicePayouts]
+//
 // API reference: https://docs.payrexhq.com/docs/api/payouts
 type Payout struct {
 	BaseResource
@@ -34,6 +36,8 @@ type PayoutDestination struct {
 // PayoutTransaction represents every line item of a Payout.
 //
 // Every [PayoutTransaction] belongs to a [Payout] resource.
+//
+// Service: [ServicePayouts]
 //
 // API reference: https://docs.payrexhq.com/docs/api/payout_transactions
 type PayoutTransaction struct {

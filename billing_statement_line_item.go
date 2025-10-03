@@ -3,6 +3,8 @@ package payrex
 // BillingStatementLineItem is a line item of a [BillingStatement] that pertains
 // to a business's products or services.
 //
+// Service: [ServiceBillingStatementLineItems]
+//
 // API reference: https://docs.payrexhq.com/docs/api/billing_statement_line_items
 type BillingStatementLineItem struct {
 	BaseResource

@@ -2,6 +2,9 @@ package payrex
 
 // TODO: add doc comments for resources when PayRex adds official docs for CustomerSession
 
+// CustomerSession represents a customer session.
+//
+// Service: [CustomerSession]
 type CustomerSession struct {
 	BaseResource
 	CustomerID   string                     `json:"customer_id"`

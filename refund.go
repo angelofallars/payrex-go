@@ -2,6 +2,8 @@ package payrex
 
 // Refund resources represent a refunded amount of a paid payment.
 //
+// Service: [ServiceRefunds]
+//
 // API reference: https://docs.payrexhq.com/docs/api/refunds
 type Refund struct {
 	BaseResource
