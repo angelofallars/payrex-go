@@ -131,36 +131,52 @@ func (s *ServiceWebhooks) ParseEvent(payload []byte, signatureHeader, webhookSec
 	resourceName := resourceNameContainer.Data.Resource
 
 	switch resourceName {
+
 	case "billing_statement":
 		var resourceContainer eventWithResource[BillingStatement]
 		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
 			return nil, fmt.Errorf("could not decode billing statement: %w", err)
 		}
+
 		event.billingStatement = &resourceContainer.Data
+		event.ResourceType = EventResourceTypeBillingStatement
+
 	case "checkout_session":
 		var resourceContainer eventWithResource[CheckoutSession]
 		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
 			return nil, fmt.Errorf("could not decode checkout session: %w", err)
 		}
+
 		event.checkoutSession = &resourceContainer.Data
+		event.ResourceType = EventResourceTypeCheckoutSession
+
 	case "payment_intent":
 		var resourceContainer eventWithResource[PaymentIntent]
 		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
 			return nil, fmt.Errorf("could not decode payment intent: %w", err)
 		}
+
 		event.paymentIntent = &resourceContainer.Data
+		event.ResourceType = EventResourceTypePaymentIntent
+
 	case "payout":
 		var resourceContainer eventWithResource[Payout]
 		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
 			return nil, fmt.Errorf("could not decode payout: %w", err)
 		}
+
 		event.payout = &resourceContainer.Data
+		event.ResourceType = EventResourceTypePayout
+
 	case "refund":
 		var resourceContainer eventWithResource[Refund]
 		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
 			return nil, fmt.Errorf("could not decode refund: %w", err)
 		}
+
 		event.refund = &resourceContainer.Data
+		event.ResourceType = EventResourceTypeRefund
+
 	default:
 		return nil, fmt.Errorf("unrecognized event resource: '%s'", resourceName)
 	}
