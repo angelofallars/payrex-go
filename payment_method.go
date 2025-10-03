@@ -1,16 +1,5 @@
 package payrex
 
-// Type definitions for common types used across several resources and parameters.
-
-// Currency is a three-letter ISO currency code in uppercase.
-//
-// As of the moment, PayRex only supports PHP.
-type Currency string
-
-const (
-	CurrencyPHP Currency = "PHP"
-)
-
 // PaymentMethod enumerates the valid payment methods for PayRex payments.
 type PaymentMethod string
 
@@ -48,7 +37,3 @@ const (
 	AllowedFundingCredit AllowedFunding = "credit"
 	AllowedFundingDebit  AllowedFunding = "debit"
 )
-
-type Event string
-
-// TODO: Event values
