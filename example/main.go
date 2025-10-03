@@ -32,7 +32,7 @@ func main() {
 	}
 
 	// Cancel a PaymentIntent
-	paymentIntent, err = payrexClient.PaymentIntents.Cancel(paymentIntent.ID)
+	_, err = payrexClient.PaymentIntents.Cancel(paymentIntent.ID)
 	if err != nil {
 		log.Fatal(err)
 	}
