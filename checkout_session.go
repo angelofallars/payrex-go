@@ -14,7 +14,7 @@ type CheckoutSession struct {
 	Status                   CheckoutSessionStatus     `json:"status"`
 	Currency                 Currency                  `json:"currency"`
 	LineItems                []CheckoutSessionLineItem `json:"line_items"`
-	PaymentIntent            *PaymentIntent            `json:"payment_intent"` // TODO: refine type
+	PaymentIntent            *PaymentIntent            `json:"payment_intent"`
 	Metadata                 *map[string]string        `json:"metadata"`
 	SuccessURL               string                    `json:"success_url"`
 	CancelURL                string                    `json:"cancel_url"`
