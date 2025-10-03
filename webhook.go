@@ -55,7 +55,7 @@ func (s *ServiceWebhooks) Retrieve(id string) (*Webhook, error) {
 // Endpoint: GET /webhooks
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/list
-func (s *ServiceWebhooks) List(params *WebhookListParams) (*Listing[Webhook], error) {
+func (s *ServiceWebhooks) List(params *WebhookListParams) (*List[Webhook], error) {
 	return s.list(params)
 }
 

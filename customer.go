@@ -50,7 +50,7 @@ func (s *ServiceCustomers) Retrieve(id string) (*Customer, error) {
 // Endpoint: GET /customers
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/list
-func (s *ServiceCustomers) List(params *CustomerListParams) (*Listing[Customer], error) {
+func (s *ServiceCustomers) List(params *CustomerListParams) (*List[Customer], error) {
 	return s.list(params)
 }
 

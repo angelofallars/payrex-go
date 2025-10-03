@@ -77,8 +77,8 @@ func (s *ServicePayouts) setup() {
 // Endpoint: GET /payouts/:id/transactions
 //
 // API reference: https://docs.payrexhq.com/docs/api/payout_transactions/list
-func (s *ServicePayouts) ListTransactions(id string, params *PayoutTransactionListParams) (*Listing[PayoutTransaction], error) {
-	return request[Listing[PayoutTransaction]](s.client,
+func (s *ServicePayouts) ListTransactions(id string, params *PayoutTransactionListParams) (*List[PayoutTransaction], error) {
+	return request[List[PayoutTransaction]](s.client,
 		http.MethodGet,
 		s.path.make(id, "transactions"),
 		params,

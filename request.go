@@ -100,8 +100,8 @@ func (s *service[T]) delete(id string) (*DeletedResource, error) {
 	)
 }
 
-func (s *service[T]) list(params any) (*Listing[T], error) {
-	return request[Listing[T]](s.client,
+func (s *service[T]) list(params any) (*List[T], error) {
+	return request[List[T]](s.client,
 		http.MethodGet,
 		s.path.make(),
 		params,
