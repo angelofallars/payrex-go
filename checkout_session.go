@@ -97,15 +97,6 @@ type CreateCheckoutSessionParams struct {
 	Events      []EventType `form:"events"`
 }
 
-// UpdateCheckoutSessionParams represents the available [ServiceCheckoutSessions.Update] parameters.
-//
-// API reference: https://docs.payrexhq.com/docs/api/checkout_sessions/update
-type UpdateCheckoutSessionParams struct {
-	URL         *string      `form:"url"`
-	Description *string      `form:"description"`
-	Events      *[]EventType `form:"events"`
-}
-
 // ListCheckoutSessionsParams represents the available [ServiceCheckoutSessions.List] parameters.
 type ListCheckoutSessionsParams struct {
 	Limit  *int    `form:"int"`
