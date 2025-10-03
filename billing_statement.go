@@ -11,7 +11,7 @@ type BillingStatement struct {
 	BaseResource
 	Status    BillingStatementStatus `json:"status"`
 	Amount    int                    `json:"amount"`
-	Currency  string                 `json:"currency"`
+	Currency  Currency               `json:"currency"`
 	LineItems []struct {
 		ID                 string `json:"id"`
 		BillingStatementID string `json:"billing_statement_id"`
@@ -144,7 +144,7 @@ func (s *ServiceBillingStatements) Void(id string) (*BillingStatement, error) {
 // API reference: https://docs.payrexhq.com/docs/api/billing_statements/create
 type BillingStatementCreateParams struct {
 	CustomerID               string             `form:"customer_id"`
-	Currency                 string             `form:"currency"`
+	Currency                 Currency           `form:"currency"`
 	Description              *string            `form:"description"`
 	BillingDetailsCollection *string            `form:"billing_details_collection"`
 	PaymentSettings          PaymentSettings    `form:"payment_settings"`
