@@ -92,10 +92,29 @@ func (s *ServiceCheckoutSessions) Expire(id string) (*CheckoutSession, error) {
 //
 // API reference: https://docs.payrexhq.com/docs/api/checkout_sessions/create
 type CreateCheckoutSessionParams struct {
-	URL         string      `form:"url"`
-	Description *string     `form:"description"`
-	Events      []EventType `form:"events"`
+	CustomerReferenceID      *string                         `form:"customer_reference_id"`
+	Currency                 Currency                        `form:"currency"`
+	LineItems                []CheckoutSessionLineItemParams `form:"line_items"`
+	Metadata                 *map[string]string              `form:"metadata"`
+	SuccessURL               string                          `form:"success_url"`
+	CancelURL                string                          `form:"cancel_url"`
+	ExpiresAt                *int                            `form:"expires_at"`
+	PaymentMethods           []PaymentMethod                 `form:"payment_methods"`
+	BillingDetailsCollection *string                         `form:"billing_details_collection"`
+	Description              *string                         `form:"description"`
+	SubmitType               *string                         `form:"submit_type"`
+	PaymentMethodOptions     *PaymentMethodOptions           `form:"payment_method_options"`
 }
+
+type CheckoutSessionLineItemParams struct {
+	Name        string  `form:"name"`
+	Amount      int     `form:"amount"`
+	Quantity    int     `form:"quantity"`
+	Description *string `form:"description"`
+	Image       *string `form:"image"`
+}
+
+// TODO: add API reference for ListCheckoutSessionsParams when docs for `GET /checkout_sessions` is added
 
 // ListCheckoutSessionsParams represents the available [ServiceCheckoutSessions.List] parameters.
 type ListCheckoutSessionsParams struct {
