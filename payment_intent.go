@@ -7,7 +7,7 @@ package payrex
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents
 type PaymentIntent struct {
-	BaseResource
+	Resource
 	Amount               int                      `json:"amount"`
 	AmountReceived       int                      `json:"amount_received"`
 	AmountCapturable     int                      `json:"amount_capturable"`

@@ -6,7 +6,7 @@ package payrex
 //
 // API reference: https://docs.payrexhq.com/docs/api/payments
 type Payment struct {
-	BaseResource
+	Resource
 	Amount          int                `json:"amount"`
 	AmountRefunded  int                `json:"amount_refunded"`
 	Billing         Billing            `json:"billing"`

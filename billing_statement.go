@@ -8,7 +8,7 @@ package payrex
 //
 // API reference: https://docs.payrexhq.com/docs/api/billing_statements
 type BillingStatement struct {
-	BaseResource
+	Resource
 	Status    BillingStatementStatus `json:"status"`
 	Amount    int                    `json:"amount"`
 	Currency  Currency               `json:"currency"`

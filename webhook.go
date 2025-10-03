@@ -11,7 +11,7 @@ import (
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks
 type Webhook struct {
-	BaseResource
+	Resource
 	SecretKey   string        `json:"secret_key"`
 	Status      WebhookStatus `json:"status"`
 	Description *string       `json:"description"`

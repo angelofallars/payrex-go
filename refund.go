@@ -6,7 +6,7 @@ package payrex
 //
 // API reference: https://docs.payrexhq.com/docs/api/refunds
 type Refund struct {
-	BaseResource
+	Resource
 	Amount      int                `json:"amount"`
 	Currency    Currency           `json:"currency"`
 	Status      RefundStatus       `json:"status"`

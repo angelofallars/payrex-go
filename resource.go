@@ -1,7 +1,7 @@
 package payrex
 
-// BaseResource defines the common fields for most resources.
-type BaseResource struct {
+// Resource defines the common fields for most resources.
+type Resource struct {
 	// Unique identifier for the resource.
 	ID string `json:"id"`
 	// 'true' if the resource's mode is live or 'false' if the resource is in test mode.

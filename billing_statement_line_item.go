@@ -7,7 +7,7 @@ package payrex
 //
 // API reference: https://docs.payrexhq.com/docs/api/billing_statement_line_items
 type BillingStatementLineItem struct {
-	BaseResource
+	Resource
 	SecretKey          string `json:"secret_key"`
 	BillingStatementID string `json:"billing_statement_id"`
 	Description        string `json:"description"`

@@ -6,7 +6,7 @@ package payrex
 //
 // API reference: https://docs.payrexhq.com/docs/api/checkout_sessions
 type CheckoutSession struct {
-	BaseResource
+	Resource
 	URL                      string                    `json:"url"`
 	BillingDetailsCollection string                    `json:"billing_details_collection"`
 	CustomerReferenceID      *string                   `json:"customer_reference_id"`

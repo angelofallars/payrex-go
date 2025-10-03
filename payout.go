@@ -10,7 +10,7 @@ import "net/http"
 //
 // API reference: https://docs.payrexhq.com/docs/api/payouts
 type Payout struct {
-	BaseResource
+	Resource
 	Amount      int               `json:"amount"`
 	Destination PayoutDestination `json:"destination"`
 	NetAmount   int               `json:"net_amount"`

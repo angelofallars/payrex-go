@@ -6,7 +6,7 @@ package payrex
 //
 // Service: [CustomerSession]
 type CustomerSession struct {
-	BaseResource
+	Resource
 	CustomerID   string                     `json:"customer_id"`
 	ClientSecret string                     `json:"client_secret"`
 	Components   []CustomerSessionComponent `json:"components"`

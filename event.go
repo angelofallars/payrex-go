@@ -8,7 +8,7 @@ import "errors"
 //
 // API reference: https://docs.payrexhq.com/docs/api/events
 type Event struct {
-	BaseResource
+	Resource
 	Type EventType `json:"type"`
 	// The name of the type of resource associated with this event.
 	// Corresponds to the first part of the Type.

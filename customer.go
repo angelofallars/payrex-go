@@ -8,7 +8,7 @@ package payrex
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers
 type Customer struct {
-	BaseResource
+	Resource
 	BillingStatementPrefix             string             `json:"billing_statement_prefix"`
 	Currency                           Currency           `json:"currency"`
 	Email                              string             `json:"email"`
