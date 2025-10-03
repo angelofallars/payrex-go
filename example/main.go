@@ -12,7 +12,7 @@ func main() {
 	payrexClient := payrex.NewClient(os.Getenv("PAYREX_API_KEY"))
 
 	// Create a PaymentIntent
-	paymentIntent, err := payrexClient.PaymentIntents.Create(&payrex.CreatePaymentIntentParams{
+	paymentIntent, err := payrexClient.PaymentIntents.Create(&payrex.PaymentIntentCreateParams{
 		Amount:      100_00, // represents ₱100.00
 		Currency:    payrex.CurrencyPHP,
 		Description: payrex.NotNil("Dino Treat"),
