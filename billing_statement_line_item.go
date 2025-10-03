@@ -30,7 +30,7 @@ func (s *ServiceBillingStatementLineItems) setup() {
 // Endpoint: POST /billing_statement_line_items
 //
 // API reference: https://docs.payrexhq.com/docs/api/billing_statement_line_items/create
-func (s *ServiceBillingStatementLineItems) Create(params *CreateBillingStatementLineItemParams) (*BillingStatementLineItem, error) {
+func (s *ServiceBillingStatementLineItems) Create(params *BillingStatementLineItemCreateParams) (*BillingStatementLineItem, error) {
 	return s.create(params)
 }
 
@@ -39,7 +39,7 @@ func (s *ServiceBillingStatementLineItems) Create(params *CreateBillingStatement
 // Endpoint: PUT /billing_statement_line_items/:id
 //
 // API reference: https://docs.payrexhq.com/docs/api/billing_statement_line_items/update
-func (s *ServiceBillingStatementLineItems) Update(id string, params *UpdateBillingStatementLineItemParams) (*BillingStatementLineItem, error) {
+func (s *ServiceBillingStatementLineItems) Update(id string, params *BillingStatementLineItemUpdateParams) (*BillingStatementLineItem, error) {
 	return s.update(id, params)
 }
 
@@ -52,20 +52,20 @@ func (s *ServiceBillingStatementLineItems) Delete(id string) (*DeletedResource, 
 	return s.delete(id)
 }
 
-// CreateBillingStatementLineItemParams represents the available [ServiceBillingStatementLineItems.Create] parameters.
+// BillingStatementLineItemCreateParams represents the available [ServiceBillingStatementLineItems.Create] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/billing_statement_line_items/create
-type CreateBillingStatementLineItemParams struct {
+type BillingStatementLineItemCreateParams struct {
 	BillingStatementID string `form:"billing_statement_id"`
 	Description        string `form:"description"`
 	UnitPrice          int    `form:"unit_price"`
 	Quantity           int    `form:"quantity"`
 }
 
-// UpdateBillingStatementLineItemParams represents the available [ServiceBillingStatementLineItems.Update] parameters.
+// BillingStatementLineItemUpdateParams represents the available [ServiceBillingStatementLineItems.Update] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/billing_statement_line_items/update
-type UpdateBillingStatementLineItemParams struct {
+type BillingStatementLineItemUpdateParams struct {
 	Description *string `form:"description"`
 	UnitPrice   *int    `form:"unit_price"`
 	Quantity    *int    `form:"quantity"`

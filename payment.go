@@ -74,14 +74,14 @@ func (s *ServicePayments) Retrieve(id string) (*Payment, error) {
 // Endpoint: PUT /payments/:id
 //
 // API reference: https://docs.payrexhq.com/docs/api/payments/update
-func (s *ServicePayments) Update(id string, params *UpdatePaymentParams) (*Payment, error) {
+func (s *ServicePayments) Update(id string, params *PaymentUpdateParams) (*Payment, error) {
 	return s.update(id, params)
 }
 
-// UpdatePaymentParams represents the available [ServicePayments.Update] parameters.
+// PaymentUpdateParams represents the available [ServicePayments.Update] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payments/update
-type UpdatePaymentParams struct {
+type PaymentUpdateParams struct {
 	Description *string            `form:"description"`
 	Metadata    *map[string]string `form:"metadata"`
 }

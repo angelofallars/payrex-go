@@ -39,7 +39,7 @@ func (s *ServiceCustomerSessions) setup() {
 // Endpoint: POST /customer_sessions
 //
 // API reference: https://docs.payrexhq.com/docs/api/customer_sessions/create
-func (s *ServiceCustomerSessions) Create(params *CreateCustomerSessionParams) (*CustomerSession, error) {
+func (s *ServiceCustomerSessions) Create(params *CustomerSessionCreateParams) (*CustomerSession, error) {
 	return s.create(params)
 }
 
@@ -52,9 +52,9 @@ func (s *ServiceCustomerSessions) Retrieve(id string) (*CustomerSession, error) 
 	return s.retrieve(id)
 }
 
-// CreateCustomerSessionParams represents the available [ServiceCustomerSessions.Create] parameters.
+// CustomerSessionCreateParams represents the available [ServiceCustomerSessions.Create] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/customer_sessions/create
-type CreateCustomerSessionParams struct {
+type CustomerSessionCreateParams struct {
 	CustomerID string `form:"customer_id"`
 }

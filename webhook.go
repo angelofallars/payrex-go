@@ -35,7 +35,7 @@ func (s *ServiceWebhooks) setup() {
 // Endpoint: POST /webhooks
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/create
-func (s *ServiceWebhooks) Create(params *CreateWebhookParams) (*Webhook, error) {
+func (s *ServiceWebhooks) Create(params *WebhookCreateParams) (*Webhook, error) {
 	return s.create(params)
 }
 
@@ -53,7 +53,7 @@ func (s *ServiceWebhooks) Retrieve(id string) (*Webhook, error) {
 // Endpoint: GET /webhooks
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/list
-func (s *ServiceWebhooks) List(params *ListWebhooksParams) (*Listing[Webhook], error) {
+func (s *ServiceWebhooks) List(params *WebhookListParams) (*Listing[Webhook], error) {
 	return s.list(params)
 }
 
@@ -62,7 +62,7 @@ func (s *ServiceWebhooks) List(params *ListWebhooksParams) (*Listing[Webhook], e
 // Endpoint: PUT /webhooks/:id
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/update
-func (s *ServiceWebhooks) Update(id string, params *UpdateWebhookParams) (*Webhook, error) {
+func (s *ServiceWebhooks) Update(id string, params *WebhookUpdateParams) (*Webhook, error) {
 	return s.update(id, params)
 }
 
@@ -93,28 +93,28 @@ func (s *ServiceWebhooks) Delete(id string) (*DeletedResource, error) {
 	return s.delete(id)
 }
 
-// CreateWebhookParams represents the available [ServiceWebhooks.Create] parameters.
+// WebhookCreateParams represents the available [ServiceWebhooks.Create] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/create
-type CreateWebhookParams struct {
+type WebhookCreateParams struct {
 	URL         string      `form:"url"`
 	Description *string     `form:"description"`
 	Events      []EventType `form:"events"`
 }
 
-// UpdateWebhookParams represents the available [ServiceWebhooks.Update] parameters.
+// WebhookUpdateParams represents the available [ServiceWebhooks.Update] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/update
-type UpdateWebhookParams struct {
+type WebhookUpdateParams struct {
 	URL         *string      `form:"url"`
 	Description *string      `form:"description"`
 	Events      *[]EventType `form:"events"`
 }
 
-// ListWebhooksParams represents the available [ServiceWebhooks.List] parameters.
+// WebhookListParams represents the available [ServiceWebhooks.List] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/list
-type ListWebhooksParams struct {
+type WebhookListParams struct {
 	Limit       *int    `form:"int"`
 	Before      *string `form:"before"`
 	After       *string `form:"after"`

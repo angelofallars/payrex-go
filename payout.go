@@ -73,7 +73,7 @@ func (s *ServicePayouts) setup() {
 // Endpoint: GET /payouts/:id/transactions
 //
 // API reference: https://docs.payrexhq.com/docs/api/payout_transactions/list
-func (s *ServicePayouts) ListTransactions(id string, params *ListPayoutTransactionsParams) (*Listing[PayoutTransaction], error) {
+func (s *ServicePayouts) ListTransactions(id string, params *PayoutTransactionListParams) (*Listing[PayoutTransaction], error) {
 	return request[Listing[PayoutTransaction]](s.client,
 		http.MethodGet,
 		s.path.make(id, "transactions"),
@@ -81,10 +81,10 @@ func (s *ServicePayouts) ListTransactions(id string, params *ListPayoutTransacti
 	)
 }
 
-// ListPayoutTransactionsParams represents the available [ServicePayouts.ListTransactions] parameters.
+// PayoutTransactionListParams represents the available [ServicePayouts.ListTransactions] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payout_transactions/list
-type ListPayoutTransactionsParams struct {
+type PayoutTransactionListParams struct {
 	Limit  *int    `form:"limit"`
 	Before *string `form:"before"`
 	After  *string `form:"after"`

@@ -55,7 +55,7 @@ func (s *ServiceCheckoutSessions) setup() {
 // Endpoint: POST /checkout_sessions
 //
 // API reference: https://docs.payrexhq.com/docs/api/checkout_sessions/create
-func (s *ServiceCheckoutSessions) Create(params *CreateCheckoutSessionParams) (*CheckoutSession, error) {
+func (s *ServiceCheckoutSessions) Create(params *CheckoutSessionCreateParams) (*CheckoutSession, error) {
 	return s.create(params)
 }
 
@@ -88,10 +88,10 @@ func (s *ServiceCheckoutSessions) Expire(id string) (*CheckoutSession, error) {
 	return s.postID(id, "expire", nil)
 }
 
-// CreateCheckoutSessionParams represents the available [ServiceCheckoutSessions.Create] parameters.
+// CheckoutSessionCreateParams represents the available [ServiceCheckoutSessions.Create] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/checkout_sessions/create
-type CreateCheckoutSessionParams struct {
+type CheckoutSessionCreateParams struct {
 	CustomerReferenceID      *string                         `form:"customer_reference_id"`
 	Currency                 Currency                        `form:"currency"`
 	LineItems                []CheckoutSessionLineItemParams `form:"line_items"`

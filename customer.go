@@ -32,7 +32,7 @@ func (s *ServiceCustomers) setup() {
 // Endpoint: POST /customers
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/create
-func (s *ServiceCustomers) Create(params *CreateCustomerParams) (*Customer, error) {
+func (s *ServiceCustomers) Create(params *CustomerCreateParams) (*Customer, error) {
 	return s.create(params)
 }
 
@@ -50,7 +50,7 @@ func (s *ServiceCustomers) Retrieve(id string) (*Customer, error) {
 // Endpoint: GET /customers
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/list
-func (s *ServiceCustomers) List(params *ListCustomersParams) (*Listing[Customer], error) {
+func (s *ServiceCustomers) List(params *CustomerListParams) (*Listing[Customer], error) {
 	return s.list(params)
 }
 
@@ -59,7 +59,7 @@ func (s *ServiceCustomers) List(params *ListCustomersParams) (*Listing[Customer]
 // Endpoint: PUT /customers/:id
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/update
-func (s *ServiceCustomers) Update(id string, params *UpdateCustomerParams) (*Customer, error) {
+func (s *ServiceCustomers) Update(id string, params *CustomerUpdateParams) (*Customer, error) {
 	return s.update(id, params)
 }
 
@@ -74,10 +74,10 @@ func (s *ServiceCustomers) Delete(id string) (*DeletedResource, error) {
 	return s.delete(id)
 }
 
-// CreateCustomerParams represents the available [ServiceCustomers.Create] parameters.
+// CustomerCreateParams represents the available [ServiceCustomers.Create] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/create
-type CreateCustomerParams struct {
+type CustomerCreateParams struct {
 	Currency                           Currency           `form:"currency"`
 	Name                               string             `form:"name"`
 	Email                              string             `form:"email"`
@@ -86,10 +86,10 @@ type CreateCustomerParams struct {
 	Metadata                           *map[string]string `form:"metadata"`
 }
 
-// ListCustomersParams represents the available [ServiceCustomers.List] parameters.
+// CustomerListParams represents the available [ServiceCustomers.List] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/list
-type ListCustomersParams struct {
+type CustomerListParams struct {
 	Limit    *int               `form:"int"`
 	Before   *string            `form:"before"`
 	After    *string            `form:"after"`
@@ -98,10 +98,10 @@ type ListCustomersParams struct {
 	Metadata *map[string]string `form:"metadata"`
 }
 
-// UpdateCustomerParams represents the available [ServiceCustomers.Update] parameters.
+// CustomerUpdateParams represents the available [ServiceCustomers.Update] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/update
-type UpdateCustomerParams struct {
+type CustomerUpdateParams struct {
 	Currency                           *Currency          `form:"currency"`
 	Name                               *string            `form:"name"`
 	Email                              *string            `form:"email"`

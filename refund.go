@@ -53,7 +53,7 @@ func (s *ServiceRefunds) setup() {
 // Endpoint: POST /refunds
 //
 // API reference: https://docs.payrexhq.com/docs/api/refunds/create
-func (s *ServiceRefunds) Create(params *CreateRefundParams) (*Refund, error) {
+func (s *ServiceRefunds) Create(params *RefundCreateParams) (*Refund, error) {
 	return s.create(params)
 }
 
@@ -62,14 +62,14 @@ func (s *ServiceRefunds) Create(params *CreateRefundParams) (*Refund, error) {
 // Endpoint: PUT /refunds/:id
 //
 // API reference: https://docs.payrexhq.com/docs/api/refunds/update
-func (s *ServiceRefunds) Update(id string, params *UpdateRefundParams) (*Refund, error) {
+func (s *ServiceRefunds) Update(id string, params *RefundUpdateParams) (*Refund, error) {
 	return s.update(id, params)
 }
 
-// CreateRefundParams represents the available [ServiceRefunds.Create] parameters.
+// RefundCreateParams represents the available [ServiceRefunds.Create] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/refunds/create
-type CreateRefundParams struct {
+type RefundCreateParams struct {
 	Amount      int                `form:"amount"`
 	Currency    Currency           `form:"currency"`
 	Description *string            `form:"description"`
@@ -79,9 +79,9 @@ type CreateRefundParams struct {
 	Metadata    *map[string]string `form:"metadata"`
 }
 
-// UpdateRefundParams represents the available [ServiceRefunds.Update] parameters.
+// RefundUpdateParams represents the available [ServiceRefunds.Update] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/refunds/update
-type UpdateRefundParams struct {
+type RefundUpdateParams struct {
 	Metadata *map[string]string `form:"metadata"`
 }

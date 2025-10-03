@@ -68,7 +68,7 @@ func (s *ServicePaymentIntents) Cancel(id string) (*PaymentIntent, error) {
 // Endpoint: POST /payment_intents/:id/capture
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/capture
-func (s *ServicePaymentIntents) Capture(id string, params *CapturePaymentIntentParams) (*PaymentIntent, error) {
+func (s *ServicePaymentIntents) Capture(id string, params *PaymentIntentCaptureParams) (*PaymentIntent, error) {
 	if params == nil {
 		return nil, ErrNilParams
 	}
@@ -81,7 +81,7 @@ func (s *ServicePaymentIntents) Capture(id string, params *CapturePaymentIntentP
 // Endpoint: POST /payment_intents
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/create
-func (s *ServicePaymentIntents) Create(params *CreatePaymentIntentParams) (*PaymentIntent, error) {
+func (s *ServicePaymentIntents) Create(params *PaymentIntentCreateParams) (*PaymentIntent, error) {
 	return s.create(params)
 }
 
@@ -94,17 +94,17 @@ func (s *ServicePaymentIntents) Retrieve(id string) (*PaymentIntent, error) {
 	return s.retrieve(id)
 }
 
-// CapturePaymentIntentParams represents the available [ServicePaymentIntents.Capture] parameters.
+// PaymentIntentCaptureParams represents the available [ServicePaymentIntents.Capture] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/capture
-type CapturePaymentIntentParams struct {
+type PaymentIntentCaptureParams struct {
 	Amount int `form:"amount"`
 }
 
-// CreatePaymentIntentParams represents the available [ServicePaymentIntents.Create] parameters.
+// PaymentIntentCreateParams represents the available [ServicePaymentIntents.Create] parameters.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents/create
-type CreatePaymentIntentParams struct {
+type PaymentIntentCreateParams struct {
 	Amount               int                   `form:"amount"`
 	PaymentMethods       []PaymentMethod       `form:"payment_methods"`
 	Currency             Currency              `form:"currency"`
