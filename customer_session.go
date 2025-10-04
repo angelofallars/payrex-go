@@ -27,8 +27,8 @@ const (
 	CustomerSessionComponentValueDisabled CustomerSessionComponentValue = "disabled"
 )
 
-// ServiceCustomerSessions provides methods to interact with [CustomerSession] resources,
-// available in the [Client].CustomerSessions field.
+// ServiceCustomerSessions is used to interact with [CustomerSession] resources,
+// using the /customer_sessions APIs.
 //
 // API reference: https://docs.payrexhq.com/docs/api/customer_sessions
 type ServiceCustomerSessions struct{ service[CustomerSession] }

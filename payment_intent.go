@@ -39,8 +39,8 @@ type PaymentIntentNextAction struct {
 	RedirectURL string `json:"redirect_url"`
 }
 
-// ServicePaymentIntents provides methods to interact with [PaymentIntent] resources,
-// available in the [Client].PaymentIntents field.
+// ServicePaymentIntents is used to interact with [PaymentIntent] resources,
+// using the /payment_intents APIs.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payment_intents
 type ServicePaymentIntents struct{ service[PaymentIntent] }

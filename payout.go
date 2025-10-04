@@ -62,8 +62,8 @@ const (
 	PayoutTransactionTypeAdjustment PayoutTransactionType = "adjustment"
 )
 
-// ServicePayouts provides methods to interact with [Payout] and [PayoutTransaction] resources,
-// available in the [Client].Payouts field.
+// ServicePayouts is used to interact with [Payout] and [PayoutTransaction] resources,
+// using the /payouts APIs.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payouts
 type ServicePayouts struct{ service[Payout] }

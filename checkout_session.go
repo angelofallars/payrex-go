@@ -42,8 +42,8 @@ type CheckoutSessionLineItem struct {
 	Image       *string `json:"image,omitempty"`
 }
 
-// ServiceCheckoutSessions provides methods to interact with [CheckoutSession] resources,
-// available in the [Client].CheckoutSessions field.
+// ServiceCheckoutSessions is used to interact with [CheckoutSession] resources,
+// using the /checkout_sessions APIs.
 //
 // API reference: https://docs.payrexhq.com/docs/api/checkout_sessions
 type ServiceCheckoutSessions struct{ service[CheckoutSession] }

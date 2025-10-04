@@ -50,8 +50,8 @@ const (
 	PaymentStatusFailed PaymentStatus = "failed"
 )
 
-// ServicePayments provides methods to interact with [Payment] resources,
-// available in the [Client].Payments field.
+// ServicePayments is used to interact with [Payment] resources,
+// using the /payments APIs.
 //
 // API reference: https://docs.payrexhq.com/docs/api/payments
 type ServicePayments struct{ service[Payment] }

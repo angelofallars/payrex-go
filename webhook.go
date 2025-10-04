@@ -22,8 +22,8 @@ const (
 	WebhookStatusDisabled WebhookStatus = "disabled"
 )
 
-// ServiceWebhooks provides methods to interact with [Webhook] resources,
-// available in the [Client].Webhooks field.
+// ServiceWebhooks is used to interact with [Webhook] resources,
+// using the /webhooks APIs.
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks
 type ServiceWebhooks struct{ service[Webhook] }

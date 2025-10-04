@@ -15,8 +15,8 @@ type BillingStatementLineItem struct {
 	Quantity           int    `json:"quantity"`
 }
 
-// ServiceBillingStatementLineItems provides methods to interact with [BillingStatementLineItem] resources,
-// available in the [Client].BillingStatementLineItems field.
+// ServiceBillingStatementLineItems is used to interact with [BillingStatementLineItem] resources,
+// using the /billing_statement_line_items APIs.
 //
 // API reference: https://docs.payrexhq.com/docs/api/billing_statement_line_items
 type ServiceBillingStatementLineItems struct {

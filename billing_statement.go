@@ -48,8 +48,8 @@ const (
 	BillingStatementStatusUncollectible BillingStatementStatus = "uncollectible"
 )
 
-// ServiceBillingStatements provides methods to interact with [BillingStatement] resources,
-// available in the [Client].BillingStatements field.
+// ServiceBillingStatements is used to interact with [BillingStatement] resources,
+// using the /billing_statements APIs.
 //
 // API reference: https://docs.payrexhq.com/docs/api/billing_statements
 type ServiceBillingStatements struct{ service[BillingStatement] }

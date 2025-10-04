@@ -40,8 +40,8 @@ const (
 	RefundReasonOthers               RefundReason = "others"
 )
 
-// ServiceRefunds provides methods to interact with [Refund] resources,
-// available in the [Client].Refunds field.
+// ServiceRefunds is used to interact with [Refund] resources,
+// using the /refunds APIs.
 //
 // API reference: https://docs.payrexhq.com/docs/api/refunds
 type ServiceRefunds struct{ service[Refund] }
