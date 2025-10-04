@@ -1,3 +1,3 @@
 module github.com/angelofallars/payrex-go
 
-go 1.22
+go 1.23
