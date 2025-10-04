@@ -69,16 +69,17 @@ paymentIntent, err := payrexClient.PaymentIntents.Create(params)
 // Enable all webhooks
 payrexClient := payrex.NewClient(apiKey)
 
-webhooks, err := payrexClient.Webhooks.List(nil)
-if err != nil {
-	log.Fatal(err)
-}
+for webhook, err := range payrexClient.Webhooks.List(nil) {
+  if err != nil {
+    log.Fatal(err)
+  }
 
-for _, webhook := range webhooks.Data {
-	_, err := payrexClient.Webhooks.Enable(webhook.ID)
-	if err != nil {
-		log.Fatal(err)
-	}
+  if webhook.Status == payrex.WebhookStatusDisabled {
+    _, err = payrexClient.Webhooks.Enable(webhook.ID)
+    if err != nil {
+      log.Fatal(err)
+    }
+  }
 }
 ```
 

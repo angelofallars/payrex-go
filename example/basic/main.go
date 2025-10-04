@@ -38,12 +38,11 @@ func main() {
 	}
 
 	// List customers
-	customers, err := payrexClient.Customers.List(nil)
-	if err != nil {
-		log.Fatal(err)
-	}
+	for customer, err := range payrexClient.Customers.List(nil) {
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	for _, customer := range customers.Data {
 		fmt.Println(customer.Name)
 	}
 }

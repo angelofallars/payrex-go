@@ -100,12 +100,24 @@ func (s *service[T]) delete(id string) (*DeletedResource, error) {
 	)
 }
 
-func (s *service[T]) list(params any) (*List[T], error) {
-	return request[List[T]](s.client,
-		http.MethodGet,
-		s.path.make(),
-		params,
-	)
+func (s *service[T]) list(params any) Seq2[*T, error] {
+	return func(yield func(*T, error) bool) {
+		resources, err := request[List[T]](s.client,
+			http.MethodGet,
+			s.path.make(),
+			params,
+		)
+		if err != nil {
+			yield(nil, err)
+			return
+		}
+
+		for _, resource := range resources.Data {
+			if !yield(&resource, nil) {
+				return
+			}
+		}
+	}
 }
 
 func (s *service[T]) post(path urlPath, params any) (*T, error) {

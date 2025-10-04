@@ -66,7 +66,7 @@ func (s *ServiceCheckoutSessions) Create(params *CheckoutSessionCreateParams) (*
 // Endpoint: GET /checkout_sessions
 //
 // API reference: https://docs.payrexhq.com/docs/api/checkout_sessions/list
-func (s *ServiceCheckoutSessions) List(params *ListCheckoutSessionsParams) (*List[CheckoutSession], error) {
+func (s *ServiceCheckoutSessions) List(params *ListCheckoutSessionsParams) Seq2[*CheckoutSession, error] {
 	return s.list(params)
 }
 

@@ -81,7 +81,7 @@ func (s *ServiceBillingStatements) Retrieve(id string) (*BillingStatement, error
 // Endpoint: GET /billing_statements
 //
 // API reference: https://docs.payrexhq.com/docs/api/billing_statements/list
-func (s *ServiceBillingStatements) List(params *BillingStatementListParams) (*List[BillingStatement], error) {
+func (s *ServiceBillingStatements) List(params *BillingStatementListParams) Seq2[*BillingStatement, error] {
 	return s.list(params)
 }
 
