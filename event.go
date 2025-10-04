@@ -1,6 +1,17 @@
 package payrex
 
-import "errors"
+import (
+	"bytes"
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"io"
+	"net/http"
+	"strings"
+)
 
 // Event represents updates in your PayRex account triggered either by API calls or your actions from the Dashboard.
 //
@@ -191,3 +202,146 @@ const (
 	EventResourceTypePayout           EventResourceType = "payout"
 	EventResourceTypeRefund           EventResourceType = "refund"
 )
+
+var (
+	ErrNoSignatureHeader      = errors.New("header 'Payrex-Signature' not found in request")
+	ErrInvalidSignatureFormat = errors.New("invalid PayRex signature format")
+	ErrInvalidSignature       = errors.New("invalid PayRex signature")
+)
+
+// ParseEvent parses an event from a PayRex webhook request.
+//
+// Reference: https://docs.payrexhq.com/docs/guide/developer_handbook/webhooks
+func ParseEvent(r *http.Request, webhookSecretKey string) (*Event, error) {
+	signatureHeader := r.Header.Get("Payrex-Signature")
+
+	if signatureHeader == "" {
+		return nil, ErrNoSignatureHeader
+	}
+
+	payload, err := io.ReadAll(r.Body)
+	if err != nil {
+		return nil, fmt.Errorf("could not read request body: %w", err)
+	}
+	_ = r.Body.Close()
+
+	r.Body = io.NopCloser(bytes.NewReader(payload))
+
+	return ParseEventFromBytes(payload, signatureHeader, webhookSecretKey)
+}
+
+// ParseEventFromBytes parses an event from a PayRex webhook request.
+//
+// If you are in an [http.HandlerFunc], it's recommended to use [ParseEvent]
+// instead to extract the event directly from an *[http.Request].
+//
+// Reference: https://docs.payrexhq.com/docs/guide/developer_handbook/webhooks
+func ParseEventFromBytes(payload []byte, signatureHeader, webhookSecretKey string) (*Event, error) {
+	if err := verifyWebhookSignature(payload, signatureHeader, webhookSecretKey); err != nil {
+		return nil, fmt.Errorf("webhook signature verification failed: %w", err)
+	}
+
+	// eventWithResourceName is used to parse the resource name of an [Event].
+	type eventWithResourceName struct {
+		Data struct {
+			Resource string `json:"resource"`
+		} `json:"data"`
+	}
+
+	// eventWithResource is used to parse the resource type of an [Event].
+	type eventWithResource[T any] struct {
+		Data T `json:"data"`
+	}
+
+	var event Event
+	if err := json.Unmarshal(payload, &event); err != nil {
+		return nil, fmt.Errorf("could not decode event: %w", err)
+	}
+
+	var resourceNameContainer eventWithResourceName
+	if err := json.Unmarshal(payload, &resourceNameContainer); err != nil {
+		return nil, fmt.Errorf("could not decode event resource: %w", err)
+	}
+
+	resourceName := resourceNameContainer.Data.Resource
+
+	switch resourceName {
+
+	case "billing_statement":
+		var resourceContainer eventWithResource[BillingStatement]
+		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
+			return nil, fmt.Errorf("could not decode billing statement: %w", err)
+		}
+
+		event.billingStatement = &resourceContainer.Data
+		event.ResourceType = EventResourceTypeBillingStatement
+
+	case "checkout_session":
+		var resourceContainer eventWithResource[CheckoutSession]
+		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
+			return nil, fmt.Errorf("could not decode checkout session: %w", err)
+		}
+
+		event.checkoutSession = &resourceContainer.Data
+		event.ResourceType = EventResourceTypeCheckoutSession
+
+	case "payment_intent":
+		var resourceContainer eventWithResource[PaymentIntent]
+		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
+			return nil, fmt.Errorf("could not decode payment intent: %w", err)
+		}
+
+		event.paymentIntent = &resourceContainer.Data
+		event.ResourceType = EventResourceTypePaymentIntent
+
+	case "payout":
+		var resourceContainer eventWithResource[Payout]
+		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
+			return nil, fmt.Errorf("could not decode payout: %w", err)
+		}
+
+		event.payout = &resourceContainer.Data
+		event.ResourceType = EventResourceTypePayout
+
+	case "refund":
+		var resourceContainer eventWithResource[Refund]
+		if err := json.Unmarshal(payload, &resourceContainer); err != nil {
+			return nil, fmt.Errorf("could not decode refund: %w", err)
+		}
+
+		event.refund = &resourceContainer.Data
+		event.ResourceType = EventResourceTypeRefund
+
+	default:
+		return nil, fmt.Errorf("unrecognized event resource: '%s'", resourceName)
+	}
+
+	return &event, nil
+}
+
+func verifyWebhookSignature(payload []byte, signatureHeader, webhookSecretKey string) error {
+	parts := strings.Split(signatureHeader, ",")
+	if len(parts) < 3 {
+		return ErrInvalidSignatureFormat
+	}
+
+	timestamp := strings.SplitN(parts[0], "=", 2)[1]
+	testModeSig := strings.SplitN(parts[1], "=", 2)[1]
+	liveModeSig := strings.SplitN(parts[2], "=", 2)[1]
+
+	comparisonSig := liveModeSig
+	if comparisonSig == "" {
+		comparisonSig = testModeSig
+	}
+
+	message := []byte(timestamp + "." + string(payload))
+	mac := hmac.New(sha256.New, []byte(webhookSecretKey))
+	mac.Write(message)
+	expectedMAC := hex.EncodeToString(mac.Sum(nil))
+
+	if expectedMAC != comparisonSig {
+		return ErrInvalidSignature
+	}
+
+	return nil
+}
