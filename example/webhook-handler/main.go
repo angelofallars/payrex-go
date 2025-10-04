@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,49 +9,46 @@ import (
 	"github.com/angelofallars/payrex-go"
 )
 
-func handleWebhook(webhookSecretKey string) http.HandlerFunc {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		event, err := payrex.ParseEvent(r, webhookSecretKey)
-		if err != nil {
-			w.WriteHeader(http.StatusUnauthorized)
-			log.Println(err)
-			return
-		}
+var webhookSecretKey = os.Getenv("PAYREX_WEBHOOK_SECRET")
 
-		switch event.ResourceType {
+func handleWebhook(w http.ResponseWriter, r *http.Request) {
+	event, err := payrex.ParseEvent(r, webhookSecretKey)
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		log.Println(err)
+		return
+	}
 
-		case payrex.EventResourceTypeBillingStatement:
-			billingStatement := event.MustBillingStatement()
-			prettyPrint(billingStatement)
+	switch event.ResourceType {
+	case payrex.EventResourceTypeBillingStatement:
+		billingStatement := event.MustBillingStatement()
+		fmt.Printf("%+v\n", billingStatement)
 
-		case payrex.EventResourceTypeCheckoutSession:
-			checkoutSession := event.MustCheckoutSession()
-			prettyPrint(checkoutSession)
+	case payrex.EventResourceTypeCheckoutSession:
+		checkoutSession := event.MustCheckoutSession()
+		fmt.Printf("%+v\n", checkoutSession)
 
-		case payrex.EventResourceTypePaymentIntent:
-			paymentIntent := event.MustPaymentIntent()
-			prettyPrint(paymentIntent)
+	case payrex.EventResourceTypePaymentIntent:
+		paymentIntent := event.MustPaymentIntent()
+		fmt.Printf("%+v\n", paymentIntent)
 
-		case payrex.EventResourceTypePayout:
-			payout := event.MustPayout()
-			prettyPrint(payout)
+	case payrex.EventResourceTypePayout:
+		payout := event.MustPayout()
+		fmt.Printf("%+v\n", payout)
 
-		case payrex.EventResourceTypeRefund:
-			refund := event.MustRefund()
-			prettyPrint(refund)
-
-		}
-	})
+	case payrex.EventResourceTypeRefund:
+		refund := event.MustRefund()
+		fmt.Printf("%+v\n", refund)
+	}
 }
 
 func main() {
-	webhookSecretKey := os.Getenv("PAYREX_WEBHOOK_SECRET")
 	if webhookSecretKey == "" {
 		log.Fatal("PAYREX_WEBHOOK_SECRET not set")
 	}
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", handleWebhook(webhookSecretKey))
+	mux.HandleFunc("/", handleWebhook)
 
 	server := http.Server{
 		Addr:    ":2003",
@@ -60,13 +56,4 @@ func main() {
 	}
 
 	log.Fatal(server.ListenAndServe())
-}
-
-func prettyPrint(v any) {
-	b, err := json.MarshalIndent(v, "", "  ")
-	if err != nil {
-		fmt.Println("error:", err)
-		return
-	}
-	fmt.Println(string(b))
 }
