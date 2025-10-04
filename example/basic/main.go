@@ -43,7 +43,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	for _, customer := range customers.Values {
+	for _, customer := range customers.Data {
 		fmt.Println(customer.Name)
 	}
 }

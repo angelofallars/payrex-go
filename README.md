@@ -74,7 +74,7 @@ if err != nil {
 	log.Fatal(err)
 }
 
-for _, webhook := range webhooks.Values {
+for _, webhook := range webhooks.Data {
 	_, err := payrexClient.Webhooks.Enable(webhook.ID)
 	if err != nil {
 		log.Fatal(err)
