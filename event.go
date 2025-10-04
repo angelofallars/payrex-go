@@ -34,6 +34,50 @@ type Event struct {
 	refund           *Refund
 }
 
+// EventType enumerates the event types of an [Event]
+// that a [Webhook] can listen to.
+type EventType string
+
+const (
+	EventTypeBillingStatementCreated             EventType = "billing_statement.created"
+	EventTypeBillingStatementUpdated             EventType = "billing_statement.updated"
+	EventTypeBillingStatementDeleted             EventType = "billing_statement.deleted"
+	EventTypeBillingStatementFinalized           EventType = "billing_statement.finalized"
+	EventTypeBillingStatementSent                EventType = "billing_statement.sent"
+	EventTypeBillingStatementMarkedUncollectible EventType = "billing_statement.marked_uncollectible"
+	EventTypeBillingStatementVoided              EventType = "billing_statement.voided"
+	EventTypeBillingStatementPaid                EventType = "billing_statement.paid"
+	EventTypeBillingStatementWillBeDue           EventType = "billing_statement.will_be_due"
+	EventTypeBillingStatementOverdue             EventType = "billing_statement.overdue"
+	EventTypeBillingStatementLineItemCreated     EventType = "billing_statement_line_item.created"
+	EventTypeBillingStatementLineItemUpdated     EventType = "billing_statement_line_item.updated"
+	EventTypeBillingStatementLineItemDeleted     EventType = "billing_statement_line_item.deleted"
+	EventTypeCheckoutSessionExpired              EventType = "checkout_session.expired"
+	EventTypePaymentIntentAwaitingCapture        EventType = "payment_intent.awaiting_capture"
+	EventTypePaymentIntentSucceeded              EventType = "payment_intent.succeeded"
+	EventTypePayoutDeposited                     EventType = "payout.deposited"
+	EventTypeRefundCreated                       EventType = "refund.created"
+	EventTypeRefundUpdated                       EventType = "refund.updated"
+)
+
+// EventResourceType enumerates the types of resources that an [Event]
+// can have.
+//
+// When an Event.ResourceType field matches one of the values here, it's safe to call the
+// corresponding Event.Must<Resource>() method.
+//
+// For example, if the Event.ResourceType is [EventResourceTypeBillingStatement], you can
+// call [Event.MustBillingStatement] without issues.
+type EventResourceType string
+
+const (
+	EventResourceTypeBillingStatement EventResourceType = "billing_statement"
+	EventResourceTypeCheckoutSession  EventResourceType = "checkout_session"
+	EventResourceTypePaymentIntent    EventResourceType = "payment_intent"
+	EventResourceTypePayout           EventResourceType = "payout"
+	EventResourceTypeRefund           EventResourceType = "refund"
+)
+
 // BillingStatement returns the billing statement associated with this event,
 // if the event type starts with 'billing_statement'.
 //
@@ -158,50 +202,6 @@ func (e *Event) MustRefund() *Refund {
 	}
 	return refund
 }
-
-// EventType enumerates the event types of an [Event]
-// that a [Webhook] can listen to.
-type EventType string
-
-const (
-	EventTypeBillingStatementCreated             EventType = "billing_statement.created"
-	EventTypeBillingStatementUpdated             EventType = "billing_statement.updated"
-	EventTypeBillingStatementDeleted             EventType = "billing_statement.deleted"
-	EventTypeBillingStatementFinalized           EventType = "billing_statement.finalized"
-	EventTypeBillingStatementSent                EventType = "billing_statement.sent"
-	EventTypeBillingStatementMarkedUncollectible EventType = "billing_statement.marked_uncollectible"
-	EventTypeBillingStatementVoided              EventType = "billing_statement.voided"
-	EventTypeBillingStatementPaid                EventType = "billing_statement.paid"
-	EventTypeBillingStatementWillBeDue           EventType = "billing_statement.will_be_due"
-	EventTypeBillingStatementOverdue             EventType = "billing_statement.overdue"
-	EventTypeBillingStatementLineItemCreated     EventType = "billing_statement_line_item.created"
-	EventTypeBillingStatementLineItemUpdated     EventType = "billing_statement_line_item.updated"
-	EventTypeBillingStatementLineItemDeleted     EventType = "billing_statement_line_item.deleted"
-	EventTypeCheckoutSessionExpired              EventType = "checkout_session.expired"
-	EventTypePaymentIntentAwaitingCapture        EventType = "payment_intent.awaiting_capture"
-	EventTypePaymentIntentSucceeded              EventType = "payment_intent.succeeded"
-	EventTypePayoutDeposited                     EventType = "payout.deposited"
-	EventTypeRefundCreated                       EventType = "refund.created"
-	EventTypeRefundUpdated                       EventType = "refund.updated"
-)
-
-// EventResourceType enumerates the types of resources that an [Event]
-// can have.
-//
-// When an Event.ResourceType field matches one of the values here, it's safe to call the
-// corresponding Event.Must<Resource>() method.
-//
-// For example, if the Event.ResourceType is [EventResourceTypeBillingStatement], you can
-// call [Event.MustBillingStatement] without issues.
-type EventResourceType string
-
-const (
-	EventResourceTypeBillingStatement EventResourceType = "billing_statement"
-	EventResourceTypeCheckoutSession  EventResourceType = "checkout_session"
-	EventResourceTypePaymentIntent    EventResourceType = "payment_intent"
-	EventResourceTypePayout           EventResourceType = "payout"
-	EventResourceTypeRefund           EventResourceType = "refund"
-)
 
 var (
 	ErrNoSignatureHeader      = errors.New("header 'Payrex-Signature' not found in request")
