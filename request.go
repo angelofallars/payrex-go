@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"iter"
 	"net/http"
 	"reflect"
 
@@ -100,7 +101,7 @@ func (s *service[T]) delete(id string) (*DeletedResource, error) {
 	)
 }
 
-func (s *service[T]) list(params any) Seq2[*T, error] {
+func (s *service[T]) list(params any) iter.Seq2[*T, error] {
 	return func(yield func(*T, error) bool) {
 		resources, err := request[List[T]](s.client,
 			http.MethodGet,

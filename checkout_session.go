@@ -1,5 +1,7 @@
 package payrex
 
+import "iter"
+
 // CheckoutSession is used to notify your application about events in your PayRex account.
 //
 // Service: [ServiceCheckoutSessions]
@@ -66,7 +68,7 @@ func (s *ServiceCheckoutSessions) Create(params *CheckoutSessionCreateParams) (*
 // Endpoint: GET /checkout_sessions
 //
 // API reference: https://docs.payrexhq.com/docs/api/checkout_sessions/list
-func (s *ServiceCheckoutSessions) List(params *ListCheckoutSessionsParams) Seq2[*CheckoutSession, error] {
+func (s *ServiceCheckoutSessions) List(params *ListCheckoutSessionsParams) iter.Seq2[*CheckoutSession, error] {
 	return s.list(params)
 }
 

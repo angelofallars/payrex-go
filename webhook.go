@@ -1,5 +1,7 @@
 package payrex
 
+import "iter"
+
 // Webhook is used to notify your application about events in your PayRex account.
 //
 // Service: [ServiceWebhooks]
@@ -55,7 +57,7 @@ func (s *ServiceWebhooks) Retrieve(id string) (*Webhook, error) {
 // Endpoint: GET /webhooks
 //
 // API reference: https://docs.payrexhq.com/docs/api/webhooks/list
-func (s *ServiceWebhooks) List(params *WebhookListParams) Seq2[*Webhook, error] {
+func (s *ServiceWebhooks) List(params *WebhookListParams) iter.Seq2[*Webhook, error] {
 	return s.list(params)
 }
 

@@ -1,5 +1,7 @@
 package payrex
 
+import "iter"
+
 // Customer represents the customer of your business.
 // A customer could be a person or a company.
 // Use this resource to track payments that belong to the same customer.
@@ -50,7 +52,7 @@ func (s *ServiceCustomers) Retrieve(id string) (*Customer, error) {
 // Endpoint: GET /customers
 //
 // API reference: https://docs.payrexhq.com/docs/api/customers/list
-func (s *ServiceCustomers) List(params *CustomerListParams) Seq2[*Customer, error] {
+func (s *ServiceCustomers) List(params *CustomerListParams) iter.Seq2[*Customer, error] {
 	return s.list(params)
 }
 
